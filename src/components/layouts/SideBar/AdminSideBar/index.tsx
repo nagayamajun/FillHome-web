@@ -9,6 +9,7 @@ import { IoIosCreate } from "react-icons/io";
 
 export const AdminSidebar = () => {
   const { owner } = useCertainOwner();
+  useAuth();
 
   //SideBarに必要なリンクの配列
   const menuLinks = [

@@ -7,7 +7,7 @@ import { useRecoilState } from "recoil"
 export const useLoading = () => {
   const [state, setState] = useRecoilState<Loading>(LoadingState);
     const showLoading = useCallback((): void => {
-      setState({ ...state, ... { isLoading: false }});
+      setState({ ...state, ... { isLoading: true }});
     },
     []
   )

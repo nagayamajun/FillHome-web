@@ -11,8 +11,6 @@ export const useSpecificRentalHouseAndBelongingToRooms = (houseId?: string) => {
   useEffect(() => {
     if(!houseId) return
     (async () => {
-      // リファクタ: 毎回checkを待ってから返す必要がある。
-      if (!axiosInstance.defaults.headers.common["Authorization"]) return
       showLoading();
       const fetchedRes = await rentalHoseRepository.getRoomsWithSpecificRentalHouse(houseId);
       setSpecificRentalHouseAndBelongingToRooms(fetchedRes)

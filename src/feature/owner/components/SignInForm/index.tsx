@@ -38,7 +38,7 @@ export const SignInForm = (): JSX.Element => {
             });
             const cookies = parseCookies();
             //headerに認証情報を追加する
-            setAuthCookie(data.id)
+            setAuthCookie(cookies.ownerId)
 
             setOwner(data);
             return router.push(Routing.adminRentalHouses.buildRoute().path)

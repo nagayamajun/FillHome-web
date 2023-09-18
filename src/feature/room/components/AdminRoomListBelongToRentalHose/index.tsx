@@ -7,7 +7,7 @@ type Props = {
 
 export const AdminRoomListBelongToRentalHose = ({ mansionRooms }: Props) => (
   <div className="w-full px-4 grid gap-x-4 gap-y-8  sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 ">
-    { !mansionRooms?.mansion_rooms?.length ? (
+    { !mansionRooms?.mansion_rooms ? (
       <p className="text-center font-bold text-red-400">まだ作成していません。</p>
     ) : (
       mansionRooms?.mansion_rooms?.map(({ id, name, mansion_room_photos, stay_fee }) => {

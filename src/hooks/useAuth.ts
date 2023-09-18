@@ -5,7 +5,6 @@ import { parseCookies, setCookie, destroyCookie } from 'nookies';
 import { axiosInstance, setAuthCookie } from "@/lib/axios";
 import { useLoading } from "./useLoading";
 
-// TODO: 最終日までに認証をしっかり書く
 export const useAuth = () => {
   const router = useRouter(); 
   const cookies = parseCookies();

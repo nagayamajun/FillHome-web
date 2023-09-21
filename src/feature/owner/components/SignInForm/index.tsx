@@ -5,12 +5,10 @@ import { useForm } from "react-hook-form";
 import { signInInputSchema } from "../../type/schema";
 import { useToast } from "@/hooks/useToast";
 import { useCertainOwner } from "@/hooks/useCertainOwner";
-import { authRepository } from "../../modules/auth/auth.repository";
+import { authRepository } from "../../modules/auth.repository";
 import { ToastResult } from "@/type/toast";
 import { Routing } from "@/hooks/routing";
 import { useRouter } from "next/router";
-import { parseCookies, setCookie, destroyCookie } from 'nookies'
-import { setAuthCookie } from "@/lib/axios";
 
 
 export const SignInForm = (): JSX.Element => {
@@ -29,16 +27,7 @@ export const SignInForm = (): JSX.Element => {
         setTimeout(() => {
           hideToast();
           if (style === 'success') {
-            //TODO: 共通化する
-            //cookieをセットする
-            setCookie(null, 'ownerId', data.id, {
-              // 30日間有効なCookie
-              maxAge: 30 * 24 * 60 * 60, 
-              path: '/admin', 
-            });
-            const cookies = parseCookies();
             //headerに認証情報を追加する
-            setAuthCookie(cookies.ownerId)
 
             setOwner(data);
             return router.push(Routing.adminRentalHouses.buildRoute().path)

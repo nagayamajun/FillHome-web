@@ -1,7 +1,7 @@
 import { PlainButton } from "@/components/atoms/Button"
 import { PlainInput } from "@/components/molecules/Input"
 import { useForm } from "react-hook-form";
-import { authRepository } from "../../modules/auth/auth.repository";
+import { authRepository } from "../../modules/auth.repository";
 import { ToastResult } from "@/type/toast";
 import { useToast } from "@/hooks/useToast";
 import { useRouter } from "next/router";
@@ -9,8 +9,7 @@ import { useCertainOwner } from "@/hooks/useCertainOwner";
 import { signUpInputSchema } from "../../type/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Routing } from "@/hooks/routing";
-import { parseCookies, setCookie } from "nookies";
-import { setAuthCookie } from "@/lib/axios";
+import { setAuthToken } from "@/lib/axios";
 
 export const SignUpForm = () => {
   const router = useRouter();
@@ -28,19 +27,11 @@ export const SignUpForm = () => {
         setTimeout(() => {
           hideToast();
           if (style === 'success') {
-
-            //cookieをセットする
-            setCookie(null, 'ownerId', data.id, {
-              // 30日間有効なCookie
-              maxAge: 30 * 24 * 60 * 60, 
-              path: '/admin', 
-            });
-            const cookies = parseCookies();
             //headerに認証情報を追加する
-            setAuthCookie(data.id)
-
+            setAuthToken(data.token);
             setOwner(data);
-            return router.push(Routing.adminRentalHouses.buildRoute().path)
+
+            router.push(Routing.adminRentalHouses.buildRoute().path)
           }
         }, 3000)
       })

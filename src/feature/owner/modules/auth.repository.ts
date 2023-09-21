@@ -1,11 +1,15 @@
-import { axiosInstance } from "@/lib/axios";
-import { AuthRepository } from "../../type/auth.repository";
+import { axiosInstance, setAuthToken } from "@/lib/axios";
+import { AuthRepository } from "../type/auth.repository";
 import { FAIL_TO_SIGNIN, FAIL_TO_SIGNUP, SUCCESS_TO_SIGNIN, SUCCESS_TO_SIGNUP } from "@/constants/messages";
+import { UserCredential, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/lib/firebase";
+import { ownerRepository } from "./owner.repository";
 
 export const authRepository: AuthRepository = {
   async signUp(createData) {
     try {
-      const res = await axiosInstance.post('/v1/owner/signup', createData);
+      const res = await axiosInstance.post('/auth/signup', createData);
+      console.log("resの中身", res.data);
       return {
         style: 'success',
         message: SUCCESS_TO_SIGNUP,
@@ -21,13 +25,22 @@ export const authRepository: AuthRepository = {
       };
     }
   },
+
+  // BEには接続しないでFEからFirebaseで検証する。
+  // 参考記事 -> https://qiita.com/gagagaga_dev/items/a8dd490114c315329279
   async signIn(signInData) {
     try {
-      const res = await axiosInstance.post('/v1/owner/login', signInData);
+      const userCredential: UserCredential = await signInWithEmailAndPassword(auth, signInData.email, signInData.password);
+      //token取得
+      const token = await userCredential.user.getIdToken();
+      setAuthToken(token);
+
+      const owner = await ownerRepository.getByFirebaseUID();
+
       return {
         style: 'success',
         message: SUCCESS_TO_SIGNIN,
-        data: res.data
+        data: owner
       }
     } catch (error: unknown) {
       const isTypeSafeError = error instanceof Error;
@@ -38,5 +51,5 @@ export const authRepository: AuthRepository = {
         }`,
       };
     }
-  }
+  },
 }

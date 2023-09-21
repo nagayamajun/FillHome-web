@@ -1,26 +1,45 @@
-import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { Routing } from "./routing";
-import { parseCookies, setCookie, destroyCookie } from 'nookies';
-import { axiosInstance, setAuthCookie } from "@/lib/axios";
+import { useRecoilState } from "recoil";
+import { onAuthStateChanged } from "firebase/auth";
+import { useRouter } from "next/router";
+import { OwnerState, OwnerStateType } from "@/store/owner";
+import { auth } from "@/lib/firebase";
+import { setAuthToken } from "@/lib/axios";
+import { ownerRepository } from "@/feature/owner/modules/owner.repository";
 import { useLoading } from "./useLoading";
+import { Routing } from "./routing";
 
-export const useAuth = () => {
-  const router = useRouter(); 
-  const cookies = parseCookies();
+export const useAuth = (): OwnerStateType => {
+  const router = useRouter();
+  const [owner, setOwner] = useRecoilState<OwnerStateType>(OwnerState);
   const { showLoading, hideLoading } = useLoading();
 
-  useEffect(() => { 
-    // cookieがない時は認証に飛ばす
+  useEffect(() => {
     showLoading();
-    if (Object.keys(cookies).length === 0) router.push(Routing.ownerSignIn.buildRoute().path);
-    //headerに情報を登録できなくても認証に飛ばす。
-    setAuthCookie(cookies.ownerId);
-    if (!axiosInstance.defaults.headers.common["Authorization"]) router.push(Routing.ownerSignIn.buildRoute().path); 
+    const unsub = onAuthStateChanged(auth, async (authUser) => {
+      //操作者がfirebase上でログインしている状態でなければ、サインインページにリダイレクト
+      if (!authUser) {
+        router.push(Routing.ownerSignIn.buildRoute().path);
+        return;
+      }
+
+      const token = await authUser.getIdToken();
+      setAuthToken(token);
+
+      const owner = await ownerRepository.getByFirebaseUID();
+      //firebase上でログインしている操作者がDBのuserレコード上では見つからなかった場合も、サインインページにリダイレクト
+      if (!owner) {
+        router.push(Routing.ownerSignIn.buildRoute().path);
+        return;
+      }
+      setOwner(owner);
+    });
     hideLoading();
+    return () => unsub();
   }, []);
 
-  return { cookies }
-
+  return owner;
 };
 
+//リファクタ
+//contextの形で認証が必要なページを囲う

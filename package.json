@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "npm run dev:core & npm run dev:proxy",
+    "dev": "next dev",
     "dev:core": "next dev -p 3002",
     "dev:proxy": "local-ssl-proxy --key localhost-key.pem --cert localhost.pem --source 3001 --target 3002",
     "build": "next build",

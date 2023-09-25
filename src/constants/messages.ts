@@ -10,3 +10,4 @@ export const FAIL_TO_SIGNIN = 'ログインに失敗しました。';
 export const FAIL_TO_GET_RENTALHOUSE = '物件の取得に失敗しました。';
 export const FAIL_TO_GET_ROOMS_WITH_RENTALHOUSE = '物件と物件に紐ずくルームの取得に失敗しました'
 export const SUCCESS_TO_RENTALHOUSE = '物件の作成に成功しました';
+export const FAIL_TO_CREATE_RENTAL_HOUSE = '物件の作成に失敗しました'

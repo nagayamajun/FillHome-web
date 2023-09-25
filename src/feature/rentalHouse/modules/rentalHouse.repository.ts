@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/lib/axios";
-import { FAIL_TO_GET_RENTALHOUSE, FAIL_TO_GET_ROOMS_WITH_RENTALHOUSE, SUCCESS_TO_RENTALHOUSE } from "@/constants/messages";
+import { FAIL_TO_CREATE_RENTAL_HOUSE, FAIL_TO_GET_RENTALHOUSE, FAIL_TO_GET_ROOMS_WITH_RENTALHOUSE, SUCCESS_TO_RENTALHOUSE } from "@/constants/messages";
 import { RentalHouse } from "../type/rentalHouse";
 import { ToastResult } from "@/type/toast";
 
@@ -24,7 +24,7 @@ export const rentalHoseRepository = {
   //mansionRoomは帰ってきていなくて代わりに中間テーブル(mansion)が返ってくる
   async getAllOwn(): Promise<RentalHouse[]> {
     try {
-      const res = await axiosInstance.get(`/v1/owner/rental_houses`)
+      const res = await axiosInstance.get(`/rental-house/owner`)
       return res.data
     } catch (error: unknown) {
       const isTypeSafeError = error instanceof Error;
@@ -64,12 +64,12 @@ export const rentalHoseRepository = {
       nearest_station: nearest_station,
       max_floor_number: max_floor_number,
       building_age: building_age,
-      structure_type_id: structure_type_id,
+      structure_type: structure_type_id,
       rental_house_photos: rental_house_photos
     }
 
     try {
-      await axiosInstance.post('/v1/owner/mansions', {
+      await axiosInstance.post('rental-house/create', {
         rental_house
       })
 
@@ -81,7 +81,7 @@ export const rentalHoseRepository = {
       const isTypeSafeError = error instanceof Error;
       return {
         style: 'failed',
-        message: `${FAIL_TO_GET_RENTALHOUSE}\n${
+        message: `${FAIL_TO_CREATE_RENTAL_HOUSE}\n${
           isTypeSafeError ? error.message : ""
         }`,
       };

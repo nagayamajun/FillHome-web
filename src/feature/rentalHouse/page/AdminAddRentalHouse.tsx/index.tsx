@@ -22,9 +22,9 @@ export const AddRentalHouse = () => {
   const { showToast, hideToast } = useToast();
 
   const onSubmit = async(data: any) => {
+    showLoading();
     const urls = await uploadFirebaseStorageAndReturnDownloadURLs({files: data.rental_house_photos, destinationPath: 'rentalHousePhotos'});
     try {
-      showLoading();
       await rentalHoseRepository.create(data.name, data.address, data.nearest_station, data.max_floor_number, data.building_age, data.structure_type_id, urls)
       .then(({ style, message }) => {
         showToast({ message, style });
@@ -35,6 +35,7 @@ export const AddRentalHouse = () => {
       })
       hideLoading();
     } catch (error) {
+      hideLoading();
       throw error
     }
   } 

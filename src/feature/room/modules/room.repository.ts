@@ -22,9 +22,9 @@ export const roomRepository = {
     }
     
     try {
-      await axiosInstance.post(`/v1/owner/mansions/${houseId}/mansion_rooms`, {
+      await axiosInstance.post(`/v1/owner/mansions/${houseId}/mansion_rooms`, 
         mansion_room
-      });
+      );
 
       return {
         style: 'success',

@@ -1,15 +1,10 @@
 import { AdminHeading } from "@/components/atoms/Heading/admin";
 import { Routing } from "@/hooks/routing";
-import { useAuth } from "@/hooks/useAuth";
-import { useCertainOwner } from "@/hooks/useCertainOwner";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { CiViewList } from "react-icons/ci";
 import { IoIosCreate } from "react-icons/io";
 
 export const AdminSidebar = () => {
-  const { owner } = useCertainOwner();
-  useAuth();
 
   //SideBarに必要なリンクの配列
   const menuLinks = [

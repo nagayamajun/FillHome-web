@@ -13,10 +13,9 @@ export const useAuth = (): OwnerStateType => {
   const router = useRouter();
   const [owner, setOwner] = useRecoilState<OwnerStateType>(OwnerState);
   const { showLoading, hideLoading } = useLoading();
-
   useEffect(() => {
-    showLoading();
     const unsub = onAuthStateChanged(auth, async (authUser) => {
+      showLoading();
       //操作者がfirebase上でログインしている状態でなければ、サインインページにリダイレクト
       if (!authUser) {
         router.push(Routing.ownerSignIn.buildRoute().path);
@@ -33,8 +32,8 @@ export const useAuth = (): OwnerStateType => {
         return;
       }
       setOwner(owner);
+      hideLoading();
     });
-    hideLoading();
     return () => unsub();
   }, []);
 

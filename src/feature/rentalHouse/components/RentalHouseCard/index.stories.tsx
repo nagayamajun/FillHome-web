@@ -19,7 +19,6 @@ const baseRentalCardArgs = {
 
 const room: BaseRoom[] = [{
   id: 1,
-  name: '1DK Apartment',
   layout: '1DK',
   thanks_money: 10000,
   security_deposit: 50000,

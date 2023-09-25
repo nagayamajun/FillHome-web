@@ -10,7 +10,7 @@ export const AdminRoomListBelongToRentalHose = ({ mansionRooms }: Props) => (
     { !mansionRooms?.mansion_rooms ? (
       <p className="text-center font-bold text-red-400">まだ作成していません。</p>
     ) : (
-      mansionRooms?.mansion_rooms?.map(({ id, name, mansion_room_photos, stay_fee }) => {
+      mansionRooms?.mansion_rooms?.map(({ id, mansion_room_photos, stay_fee }) => {
         return (
           // Linkにしてroom詳細に飛べるようにする
           <section key={id} className="flex items-center space-x-4 bg-gray-100 rounded-xl">    
@@ -24,7 +24,6 @@ export const AdminRoomListBelongToRentalHose = ({ mansionRooms }: Props) => (
               />
             </div>
             <div className="flex flex-col justify-center items-center w-auto text-sm">
-              <p>{name}</p>
               <p>宿泊費:&nbsp;¥{stay_fee}</p>
             </div>
           </section>   

@@ -4,7 +4,6 @@ import { Photo } from "@/type/photo";
 //Roomタイプの共通カラム
 export type BaseRoom = {
   id: number;
-  name: string; //ここが何に当たるか？
   layout: Layout;
   thanks_money: number;  // 礼金
   security_deposit: number; // 敷金
@@ -27,9 +26,11 @@ export type Layout =
 //マンションの中間テーブル
 export type Mansion = {
   id: number, //mansion_roomをcreateする時はこの値が必要
-  rental_house_id: number,
+  rental_house_id: string,
   mansion_rooms?: MansionRoom[]
 }
+//mansion_roomを作成する時の型
+export type CreateRoom = Omit<MansionRoom, 'id'> & { mansion_id: string}
 
 //マンションの型
 export type MansionRoom = BaseRoom;

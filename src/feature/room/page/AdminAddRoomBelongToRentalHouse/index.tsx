@@ -22,11 +22,17 @@ export const AdminAddRentalRoom = () => {
   const { showToast, hideToast } = useToast();
 
   const onSubmit = async(data: any) => {
-    const urls = await uploadFirebaseStorageAndReturnDownloadURLs({files: data.mansion_room_photos, destinationPath: 'roomPhotos'});
+    showLoading();
+    //fileとそれ以外に分ける
+    const { mansion_room_photos, ...rest} = data; 
+  
+    const urls = await uploadFirebaseStorageAndReturnDownloadURLs({files: mansion_room_photos, destinationPath: 'roomPhotos'});
 
     try {
-      showLoading();
-      await roomRepository.create(query.houseId as unknown as number, data.name, data.layout, data.thanks_money, data.security_deposit, data.floor_number, data.stay_fee, data.rent, data.maintenance_fee, data.contract_duration, urls, data.reserve_url)
+      await roomRepository.create({
+        mansion_id: query.houseId as string,
+        input: {...rest, mansion_room_photos: urls}
+      })
       .then(({ style, message }) => {
         showToast({ message, style });
         setTimeout(() => {
@@ -36,6 +42,7 @@ export const AdminAddRentalRoom = () => {
       })
       hideLoading();
     } catch (error) {
+      hideLoading();
       throw error
     }
   }
@@ -45,14 +52,6 @@ export const AdminAddRentalRoom = () => {
       <div className="flex flex-col w-full md:w-4/5 lg:w-2/3 xl:w-1/2 min-h-screen h-full items-center bg-white space-y-8 pb-16">
         <div className="mt-8 font-semibold text-center">ルームの登録</div>
         <form action="" className="w-full sm:w-4/5 space-y-4" onSubmit={handleSubmit(onSubmit)}>
-          <PlainInput
-            label="部屋名(部屋番号)"
-            register={register}
-            registerValue="name"
-            inputType="text"
-            placeholder="部屋名をご記入ください"
-            error={errors.name?.message as string}
-          />
           <PlainInput
             label="宿泊費(キャンセル料)"
             register={register}
@@ -65,7 +64,7 @@ export const AdminAddRentalRoom = () => {
             label="家賃"
             register={register}
             registerValue="rent"
-            inputType="text"
+            inputType="number"
             placeholder="家賃をご記入ください"
             error={errors.rent?.message as string}
           />

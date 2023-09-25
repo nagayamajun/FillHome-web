@@ -39,7 +39,7 @@ export const rentalHoseRepository = {
   //物件と紐ずくroom一覧取得
   async getRoomsWithSpecificRentalHouse(houseId?: number | string) {
     try {
-      const res = await axiosInstance.get(`/v1/owner/rental_houses/${houseId}/mansions/mansion_rooms`);
+      const res = await axiosInstance.get(`/rental-house/owner/${houseId}/rental-house-to-rooms`);
       return res.data; 
     } catch (error: unknown) {
       const isTypeSafeError = error instanceof Error;

@@ -1,8 +1,9 @@
 import { useRouter } from "next/router"
 import { RentalHouse } from "../../type/rentalHouse"
 import { RentalHouseCard } from "../RentalHouseCard"
-import { Loading } from "@/components/organisms/Loading"
 
+import FullCalendar from '@fullcalendar/react'
+import dayGridPlugin from '@fullcalendar/daygrid'
 
 export type Props = {
   rentalHouses: RentalHouse[]
@@ -20,7 +21,7 @@ export const RentalHouseList = ({ rentalHouses }: Props): JSX.Element => {
       return rentalHouses
      }
   });
-  
+
   return (
     <div className="mt-8 flex flex-col gap-8">
       {

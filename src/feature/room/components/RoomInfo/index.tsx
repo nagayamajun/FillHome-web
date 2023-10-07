@@ -5,7 +5,7 @@ type Props = {
   room: MansionRoom
 }
 export const RoomInfo = ({
-  room: { floor_number, layout, thanks_money, security_deposit, rent, contract_duration, mansion_room_photos, reserve_url }
+  room: { floor_number, layout, thanks_money, security_deposit, rent, contract_duration, mansion_room_photos }
 }: Props) => (
   <div className="flex flex-col mx-6"> 
     <h4 className="font-semibold text-lg">部屋情報</h4>
@@ -49,6 +49,9 @@ export const RoomInfo = ({
         layout="fill"
         alt="賃貸の写真"
       />
+    </div>
+
+    <div>
     </div>
   </div>
 )

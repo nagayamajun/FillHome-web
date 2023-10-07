@@ -7,7 +7,7 @@ export const rentalHoseRepository = {
   //物件と物件に紐ずくmansionRoomを全件取得
   async getAll(): Promise<RentalHouse[] | ToastResult> {
     try {
-      const res = await axiosInstance.get('/v1/rental_houses')
+      const res = await axiosInstance.get('/rental-house');
       return res.data;
     } catch (error: unknown) {
       const isTypeSafeError = error instanceof Error;

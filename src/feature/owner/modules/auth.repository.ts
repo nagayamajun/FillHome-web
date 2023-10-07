@@ -9,7 +9,6 @@ export const authRepository: AuthRepository = {
   async signUp(createData) {
     try {
       const res = await axiosInstance.post('/auth/signup', createData);
-      console.log("resの中身", res.data);
       return {
         style: 'success',
         message: SUCCESS_TO_SIGNUP,

@@ -8,7 +8,7 @@ type Props = {
 }
 
 export const PlainButton = ({ innerText, type, disabled }: Props): JSX.Element => (
-  <button type={type} disabled={disabled} className={`${disabled ? 'bg-gray-400': 'bg-pink-color'} py-3 px-6 rounded-xl text-white`}>
+  <button type={type} disabled={disabled} className={`${disabled ? 'bg-gray-400': 'bg-pink-color'} py-3 px-6 rounded-xl text-white w-full`}>
     {innerText}
   </button>
 )

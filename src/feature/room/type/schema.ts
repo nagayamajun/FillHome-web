@@ -13,5 +13,20 @@ export const CreateRoomSchema = z.object({
   maintenance_fee: z.coerce.number().min(1, REQUIRE_FIELD),
   mansion_room_photos: z.unknown(), //TODO: 型をつける
   reserve_url: z.string().min(1, REQUIRE_FIELD),
+  available_dates: z.unknown(), //TODO: 型をつける
 });
 export type CreateRoomInput = z.infer<typeof CreateRoomSchema>;
+
+export const CreateReservedRoomSchema = z.object({
+  stay_date: z.string().min(1, REQUIRE_FIELD),
+  last_name: z.string().min(1, REQUIRE_FIELD),
+  first_name: z.string().min(1, REQUIRE_FIELD),
+  phone_number: z.string()  .refine((phoneNumber) => {
+    const length = phoneNumber.replace(/[-()\s]/g, "").length;
+    return length === 10 || length === 11;
+  }, {
+    message: "Phone number must be 10 or 11 digits",
+  }),
+  email: z.string().min(1, REQUIRE_FIELD),
+  address: z.string().min(1, REQUIRE_FIELD),
+})

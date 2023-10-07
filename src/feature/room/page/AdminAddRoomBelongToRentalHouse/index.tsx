@@ -3,13 +3,16 @@ import { PlainInput } from "@/components/molecules/Input"
 import { PlainSelectInput } from "@/components/molecules/SelectInput";
 import { FileField } from "@/components/organisms/FileField";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { CreateRoomSchema } from "../../type/schema";
 import { uploadFirebaseStorageAndReturnDownloadURLs } from "@/utils/firebase.utils";
 import { roomRepository } from "../../modules/room.repository";
 import { useLoading } from "@/hooks/useLoading";
 import { useToast } from "@/hooks/useToast";
 import { useRouter } from "next/router";
+import { useRef, useState } from "react";
+import DatePicker, { DateObject } from "react-multi-date-picker"
+
 
 export const AdminAddRentalRoom = () => {
   const { query } = useRouter() ;
@@ -17,6 +20,8 @@ export const AdminAddRentalRoom = () => {
   const { handleSubmit, register, formState: {errors, isSubmitting}, control, watch} = useForm({
     resolver: zodResolver(CreateRoomSchema)
   });
+  const [selectedDate, setSelectedDate] = useState<DateObject[]>([])
+  const datePickerRef = useRef(null);
 
   const { showLoading, hideLoading } = useLoading();
   const { showToast, hideToast } = useToast();
@@ -24,14 +29,24 @@ export const AdminAddRentalRoom = () => {
   const onSubmit = async(data: any) => {
     showLoading();
     //fileとそれ以外に分ける
-    const { mansion_room_photos, ...rest} = data; 
+    const { mansion_room_photos, available_dates, ...rest} = data; 
   
+    const type_change_available_dates = Array.from(available_dates as DateObject[])
+      .map((dateObject) => {
+        const year = dateObject.year;
+        const month = dateObject.month.number - 1;
+        const day = dateObject.day;
+        const date = new Date(year, month, day)
+        date.setHours(0, 0, 0, 0)
+        return date.toISOString().split('T')[0];
+      });
+
     const urls = await uploadFirebaseStorageAndReturnDownloadURLs({files: mansion_room_photos, destinationPath: 'roomPhotos'});
 
     try {
       await roomRepository.create({
         mansion_id: query.houseId as string,
-        input: {...rest, mansion_room_photos: urls}
+        input: {...rest, mansion_room_photos: urls, available_dates: type_change_available_dates}
       })
       .then(({ style, message }) => {
         showToast({ message, style });
@@ -152,6 +167,26 @@ export const AdminAddRentalRoom = () => {
             register={register}
             watch={watch}
           />
+
+          <div className="flex flex-col space-y-1">
+            <label htmlFor="available_dates">予約可能日</label>
+            <Controller
+              name="available_dates"
+              control={control}
+              render={({ field }) => (
+                <DatePicker
+                  {...field}
+                  multiple
+                  value={field.value} 
+                  onChange={(selectedDates) => {
+                    setSelectedDate(selectedDates as DateObject[]); 
+                    field.onChange(selectedDates);
+                  }}
+                  ref={datePickerRef}
+                />
+              )}
+            />
+          </div>
           <div className="flex justify-center">
             <PlainButton
               innerText="登録する"

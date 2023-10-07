@@ -3,7 +3,7 @@ import { Photo } from "@/type/photo";
 
 //Roomタイプの共通カラム
 export type BaseRoom = {
-  id: number;
+  id: string;
   layout: Layout;
   thanks_money: number;  // 礼金
   security_deposit: number; // 敷金
@@ -13,7 +13,7 @@ export type BaseRoom = {
   maintenance_fee: number;
   contract_duration: string; // 契約期間
   mansion_room_photos: Photo[];
-  availableDates?: string[];
+  available_dates?: string[];
   reserve_url: string;
 }
 
@@ -25,7 +25,7 @@ export type Layout =
   
 //マンションの中間テーブル
 export type Mansion = {
-  id: number, //mansion_roomをcreateする時はこの値が必要
+  id: string, //mansion_roomをcreateする時はこの値が必要
   rental_house_id: string,
   mansion_rooms?: MansionRoom[]
 }

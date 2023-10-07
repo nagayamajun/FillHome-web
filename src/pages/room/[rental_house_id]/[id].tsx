@@ -12,7 +12,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const rental_house_id = context.query.rental_house_id;
   const id =  context.query.id;
 
-  const mansionRoomWithRentalHouse = (await axiosInstance.get(`/v1/rental_houses/${rental_house_id}/mansions/mansion_rooms/${id}`)).data;
+  const mansionRoomWithRentalHouse = (await axiosInstance.get(`/mansion-room/rental-house/${rental_house_id}/room/${id}`)).data;
 
   return {
     props: { mansionRoomWithRentalHouse },
@@ -23,12 +23,8 @@ type Props = {
   mansionRoomWithRentalHouse: MansionRoomWithRentalHouse;
 };
 
-const RoomWithHouseDetailPage = ({ mansionRoomWithRentalHouse }: Props): ReactElement => {
+const RoomWithHouseDetailPage = ({ mansionRoomWithRentalHouse }: Props): ReactElement => <RoomDetail roomWithRentalHouse={mansionRoomWithRentalHouse} />
 
-  return (
-    <RoomDetail roomWithRentalHouse={mansionRoomWithRentalHouse} />
-  )
-}
 
 
 RoomWithHouseDetailPage.getLayout = (page: ReactElement) => <UserLayout>{page}</UserLayout>;

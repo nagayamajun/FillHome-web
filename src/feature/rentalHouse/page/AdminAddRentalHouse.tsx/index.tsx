@@ -1,7 +1,7 @@
-import { PlainButton } from "@/components/atoms/Button";
-import { PlainInput } from "@/components/molecules/Input"
-import { PlainSelectInput } from "@/components/molecules/SelectInput";
-import { FileField } from "@/components/organisms/FileField";
+import { PlainButton } from "@/components/Button";
+import { PlainInput } from "@/components/Input"
+import { PlainSelectInput } from "@/components/SelectInput";
+import { FileField } from "@/components/FileField";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { CreateRentalHouseSchema } from "../../type/schema";

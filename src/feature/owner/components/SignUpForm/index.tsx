@@ -1,5 +1,5 @@
-import { PlainButton } from "@/components/atoms/Button"
-import { PlainInput } from "@/components/molecules/Input"
+import { PlainButton } from "@/components/Button"
+import { PlainInput } from "@/components/Input"
 import { useForm } from "react-hook-form";
 import { authRepository } from "../../modules/auth.repository";
 import { ToastResult } from "@/type/toast";

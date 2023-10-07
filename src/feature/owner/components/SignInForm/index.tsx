@@ -1,5 +1,5 @@
-import { PlainButton } from "@/components/atoms/Button";
-import { PlainInput } from "@/components/molecules/Input";
+import { PlainButton } from "@/components/Button";
+import { PlainInput } from "@/components/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { signInInputSchema } from "../../type/schema";

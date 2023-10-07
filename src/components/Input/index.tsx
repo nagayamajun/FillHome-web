@@ -1,4 +1,4 @@
-import { ErrorText } from "@/components/atoms/ErrorText";
+import { ErrorText } from "@/components/ErrorText";
 import { FocusEventHandler } from "react";
 import { UseFormRegister } from "react-hook-form";
 

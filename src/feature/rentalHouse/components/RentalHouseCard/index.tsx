@@ -1,4 +1,4 @@
-import { Loading } from "@/components/organisms/Loading";
+import { Loading } from "@/components/Loading";
 import { OneRoomCard } from "@/feature/room/share/OneRoomCard";
 import { MansionRoom } from "@/feature/room/type/room";
 import { Routing } from "@/hooks/routing";

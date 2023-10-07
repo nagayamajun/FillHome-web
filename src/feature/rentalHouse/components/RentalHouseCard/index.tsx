@@ -16,7 +16,8 @@ type Props = {
 }
 
 export const RentalHouseCard = ({ id, houseName, img, address, rooms }: Props): JSX.Element => {
-  const cookies = parseCookies();
+  // const cookies = parseCookies();
+  const { owner } = useCertainOwner();
 
   //1番安い家賃を取得する。
   const minRent = rooms && Math.min(...rooms.map(room => room.rent));
@@ -28,7 +29,6 @@ export const RentalHouseCard = ({ id, houseName, img, address, rooms }: Props): 
         <Image
           className="rounded-2xl"
           src={img}
-          // src={'/exapmleHouse.jpg'} 
           alt="家の写真です。"
           objectFit="cover"
           layout="fill"
@@ -37,8 +37,11 @@ export const RentalHouseCard = ({ id, houseName, img, address, rooms }: Props): 
       <div className="flex flex-col w-[320px] items-start text-left text-sm">
         <p className="text-base font-semibold">{houseName}</p>
         <p className="text-gray-500 mb-1">{address}</p>
-        {
+        {/* {
          Object.keys(cookies).length !== 0 && <p>¥{minRent}~</p> 
+        } */}
+        {
+         owner && <p>¥{minRent}~</p> 
         }
       </div>
 
@@ -52,7 +55,15 @@ export const RentalHouseCard = ({ id, houseName, img, address, rooms }: Props): 
       </div>
 
       {/* ownerはrentalHouseに紐ずくroom一覧に飛ぶ(Ownerでのみ表示) */}
-      { Object.keys(cookies).length !== 0 && 
+      {/* { Object.keys(cookies).length !== 0 && 
+        <Link 
+          href={Routing.adminRoomsBelongToHouse.buildRoute({ houseId: id }).path} 
+          className="bg-pink-color py-3 px-6 rounded-xl text-white"
+        >
+          募集中のRoom一覧
+        </Link>
+      } */}
+      { owner && 
         <Link 
           href={Routing.adminRoomsBelongToHouse.buildRoute({ houseId: id }).path} 
           className="bg-pink-color py-3 px-6 rounded-xl text-white"
@@ -62,5 +73,4 @@ export const RentalHouseCard = ({ id, houseName, img, address, rooms }: Props): 
       }
     </section>
   );
-
 }

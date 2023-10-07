@@ -3,6 +3,7 @@ import { RoutingType } from "./type";
 // user
 export const roomPath = '/room';
 export const rentalHousePath = '/rentalHouse';
+export const reservePath = '/reserve'
 
 // admin
 export const baseAdminPath = '/admin'
@@ -95,6 +96,16 @@ export const Routing: RoutingType = {
       }
     },
     pathName: 'houseに紐ずくroom作成'
+  },
+
+  reservedRoom : {
+    buildRoute: ({ mansion_room_id }) => {
+      return {
+        id: 'reservedRoom',
+        path: `${reservePath}/${mansion_room_id}`
+      }
+    },
+    pathName: 'room予約ページ'
   }
 
 }

@@ -16,6 +16,6 @@ export const RoomDetail = ({ roomWithRentalHouse: { mansion_room, rental_house }
     <RoomInfo room={mansion_room} />
 
     {/* 予約遷移フッター */}
-    <BookingFooter stayFee={mansion_room.stay_fee} reserve_url={'https://calendar.app.google/Zce3gPC5gnkPsdYQA'}/>
+    <BookingFooter stayFee={mansion_room.stay_fee} reserve_url={'https://calendar.app.google/Zce3gPC5gnkPsdYQA'} mansion_room_id={mansion_room.id}/>
   </div>
 )

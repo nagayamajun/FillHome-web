@@ -1,7 +1,7 @@
 import { PlainLink } from "@/components/Link";
 import { AdminRentalHouseInfo } from "@/feature/rentalHouse/share/AdminRentalHouseInfo";
 import { AdminRoomListBelongToRentalHose } from "../../components/AdminRoomListBelongToRentalHose";
-import { Routing } from "@/hooks/routing";
+import { Routing } from "@/Routing/routing";
 import { useRouter } from "next/router";
 import { useSpecificRentalHouseAndBelongingToRooms } from "../../hooks/useSpecificRentalHouseAndBelongingToRooms";
 import { Loading } from "@/components/Loading";

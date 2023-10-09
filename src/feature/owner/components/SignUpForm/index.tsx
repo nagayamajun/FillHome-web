@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 import { useCertainOwner } from "@/hooks/useCertainOwner";
 import { signUpInputSchema } from "../../type/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Routing } from "@/hooks/routing";
+import { Routing } from "@/Routing/routing";
 import { setAuthToken } from "@/lib/axios";
 
 export const SignUpForm = () => {

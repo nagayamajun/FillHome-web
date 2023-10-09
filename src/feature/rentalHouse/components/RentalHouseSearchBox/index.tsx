@@ -1,5 +1,5 @@
 import { SearchBox } from "@/components/Search"
-import { Routing } from "@/hooks/routing";
+import { Routing } from "@/Routing/routing";
 import { useRouter } from "next/router"
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";

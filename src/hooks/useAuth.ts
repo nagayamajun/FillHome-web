@@ -7,7 +7,7 @@ import { auth } from "@/lib/firebase";
 import { setAuthToken } from "@/lib/axios";
 import { ownerRepository } from "@/feature/owner/modules/owner.repository";
 import { useLoading } from "./useLoading";
-import { Routing } from "./routing";
+import { Routing } from "../Routing/routing";
 
 export const useAuth = (): OwnerStateType => {
   const router = useRouter();

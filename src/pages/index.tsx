@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import Link from "next/link";
 import { PlainLink } from '@/components/Link';
-import { Routing } from "@/hooks/routing";
+import { Routing } from "@/Routing/routing";
 
 const inter = Inter({ subsets: ['latin'] })
 

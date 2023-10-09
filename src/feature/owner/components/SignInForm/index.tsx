@@ -7,7 +7,7 @@ import { useToast } from "@/hooks/useToast";
 import { useCertainOwner } from "@/hooks/useCertainOwner";
 import { authRepository } from "../../modules/auth.repository";
 import { ToastResult } from "@/type/toast";
-import { Routing } from "@/hooks/routing";
+import { Routing } from "@/Routing/routing";
 import { useRouter } from "next/router";
 
 

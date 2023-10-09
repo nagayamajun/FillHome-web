@@ -1,4 +1,4 @@
-import { Routing } from "@/hooks/routing";
+import { Routing } from "@/Routing/routing";
 import Image from "next/image";
 import Link from "next/link";
 

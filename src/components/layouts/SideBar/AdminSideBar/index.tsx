@@ -1,5 +1,5 @@
 import { AdminHeading } from "@/components/Heading/admin";
-import { Routing } from "@/hooks/routing";
+import { Routing } from "@/Routing/routing";
 import Link from "next/link";
 import { CiViewList } from "react-icons/ci";
 import { IoIosCreate } from "react-icons/io";

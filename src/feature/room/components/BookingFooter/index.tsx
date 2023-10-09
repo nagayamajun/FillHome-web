@@ -1,6 +1,6 @@
 import { ErrorText } from "@/components/ErrorText";
 import { PlainLink } from "@/components/Link";
-import { Routing } from "@/hooks/routing";
+import { Routing } from "@/Routing/routing";
 
 type Props = {
   stayFee: number

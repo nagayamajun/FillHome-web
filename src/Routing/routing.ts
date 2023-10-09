@@ -1,4 +1,4 @@
-import { RoutingType } from "./type";
+import { RoutingType } from "./routing-type";
 
 // user
 export const roomPath = '/room';

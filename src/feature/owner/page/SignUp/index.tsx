@@ -1,4 +1,4 @@
-import { Routing } from "@/hooks/routing";
+import { Routing } from "@/Routing/routing";
 import { SignUpForm } from "../../components/SignUpForm";
 import { SignInSignUpToggle } from "../../components/SignInSignUpToggle";
 

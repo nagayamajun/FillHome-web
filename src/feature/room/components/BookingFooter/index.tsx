@@ -1,5 +1,5 @@
-import { ErrorText } from "@/components/atoms/ErrorText";
-import { PlainLink } from "@/components/atoms/Link";
+import { ErrorText } from "@/components/ErrorText";
+import { PlainLink } from "@/components/Link";
 import { Routing } from "@/hooks/routing";
 
 type Props = {

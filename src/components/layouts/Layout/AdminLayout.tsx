@@ -4,7 +4,7 @@ import { useAuth } from "@/hooks/useAuth"
 import { axiosInstance } from "@/lib/axios"
 import { useLoading } from "@/hooks/useLoading"
 import { useCertainOwner } from "@/hooks/useCertainOwner"
-import { Loading } from "@/components/organisms/Loading"
+import { Loading } from "@/components/Loading"
 
 type Props = {
   children: ReactNode

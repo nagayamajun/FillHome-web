@@ -1,4 +1,4 @@
-import { SearchBox } from "@/components/molecules/Search"
+import { SearchBox } from "@/components/Search"
 import { Routing } from "@/hooks/routing";
 import { useRouter } from "next/router"
 import { useCallback } from "react";

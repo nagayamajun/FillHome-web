@@ -1,4 +1,4 @@
-import { ErrorText } from "@/components/atoms/ErrorText";
+import { ErrorText } from "@/components/ErrorText";
 import { FocusEventHandler, ReactNode } from "react";
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 

@@ -1,4 +1,4 @@
-import { ErrorText } from "@/components/atoms/ErrorText";
+import { ErrorText } from "@/components/ErrorText";
 import { Control, FieldValues, UseFormRegister, UseFormWatch } from "react-hook-form";
 
 type Props = {

@@ -1,4 +1,4 @@
-import { AdminHeading } from "@/components/atoms/Heading/admin";
+import { AdminHeading } from "@/components/Heading/admin";
 import { Routing } from "@/hooks/routing";
 import Link from "next/link";
 import { CiViewList } from "react-icons/ci";

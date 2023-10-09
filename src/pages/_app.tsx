@@ -1,5 +1,5 @@
-import { Loading } from '@/components/organisms/Loading'
-import { ToastModal } from '@/components/organisms/ToastModal'
+import { Loading } from '@/components/Loading'
+import { ToastModal } from '@/components/ToastModal'
 import '@/styles/globals.css'
 import { NextPage } from 'next'
 import type { AppProps } from 'next/app'

@@ -3,7 +3,7 @@ import { Photo } from "@/type/photo";
 
 // MUST: この型から下の型に移行する
 export type RentalHouse = {
-  id: number;
+  id: string;
   name: string;
   address: string;
   nearest_station: string;
@@ -28,11 +28,15 @@ export type ReRentalHouse = {
   rental_house_photos: string[];
   structure_type_id: number;
   mansion?: MansionRoom[];
-}
+};
+
+export type StructureType = 
+  '木造' | 'S造・鉄骨造' | 'RC造・鉄筋コンクリート造';
 
 interface StructureObject {
-  [key: number]: string;
+  [key: number]: StructureType;
 }
+
 export const Structure: StructureObject = {
   1: "木造",
   2: "S造・鉄骨造",

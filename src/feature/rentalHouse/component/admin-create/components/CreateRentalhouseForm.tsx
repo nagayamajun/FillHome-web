@@ -40,7 +40,7 @@ export const CreateRentalHouseForm = () => {
         register={register}
         registerValue={ADDRESS}
         inputType="text"
-        placeholder="住所を記入"
+        placeholder="住所を入力"
         error={errors.address?.message as string}
       />
       <PlainInput
@@ -48,7 +48,7 @@ export const CreateRentalHouseForm = () => {
         register={register}
         registerValue={NEAREST_STATION}
         inputType="text"
-        placeholder="最寄駅をご記入ください"
+        placeholder="最寄駅を入力"
         error={errors.nearest_station?.message as string}
       />
       <div className="flex ">
@@ -57,7 +57,7 @@ export const CreateRentalHouseForm = () => {
           register={register}
           registerValue={MAX_FLOOR_NUMBER}
           inputType="number"
-          placeholder="何階建の建物ですか？"
+          placeholder="階を入力"
           error={errors.max_floor_number?.message as string}
         />
         <PlainInput
@@ -65,7 +65,7 @@ export const CreateRentalHouseForm = () => {
           register={register}
           registerValue={BUILDING_AGE}
           inputType="number"
-          placeholder="築年数をご記入ください"
+          placeholder="築年数をを入力"
           error={errors.building_age?.message as string}
         />
       </div>

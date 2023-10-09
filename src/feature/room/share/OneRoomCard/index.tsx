@@ -7,7 +7,7 @@ import { Loading } from "@/components/Loading";
 
 type Props = {
   room: MansionRoom;
-  rental_houseId: number
+  rental_houseId: string
 }
 
 

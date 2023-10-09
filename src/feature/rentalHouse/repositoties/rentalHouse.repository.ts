@@ -1,8 +1,10 @@
 import { axiosInstance } from "@/lib/axios";
 import { FAIL_TO_CREATE_RENTAL_HOUSE, FAIL_TO_GET_RENTALHOUSE, FAIL_TO_GET_ROOMS_WITH_RENTALHOUSE, SUCCESS_TO_RENTALHOUSE } from "@/constants/messages";
-import { ReRentalHouse, RentalHouse } from "../type/rentalHouse";
+import { ReRentalHouse, RentalHouse, Structure } from "../type/rentalHouse";
 import { ToastResult } from "@/type/toast";
 import { CreateRentalHouse } from "../component/admin-create/type";
+import { Photo } from "@/type/photo";
+import { RentalHouseModel } from "../models/rentalHouse.model";
 
 export const rentalHoseRepository = {
   //物件と物件に紐ずくmansionRoomを全件取得
@@ -78,20 +80,50 @@ export const rentalHoseRepository = {
 
 
 export type RentalHouseRepository = {
-  create: (input: CreateRentalHouse) => Promise<ReRentalHouse>,
+  create: (input: CreateRentalHouse) => Promise<RentalHouseModel>,
+  getAllOwn: () => Promise<RentalHouseModel[]>,
 };
 
 const create: RentalHouseRepository['create'] = async(
   input: CreateRentalHouse
-): Promise<ReRentalHouse> => {
-  const response = await axiosInstance.post('rental-house/create', {
+): Promise<RentalHouseModel> => {
+  const response =( await axiosInstance.post('rental-house/create', {
     ...input
-  });
+  })).data;
 
-  return response.data
+  const result: RentalHouseModel = {
+    id: response.id,
+    name: response.name,
+    address: response.address,
+    nearest_station: response.nearest_station,
+    max_floor_number: response.max_floor_number,
+    building_age: response.building_age,
+    rental_house_photos: response.rental_house_photos.map((photo: Photo) => photo.image),
+    structure_type: Structure[response.structure_type_id],
+  }
+
+  return result;
+};
+
+const getAllOwn: RentalHouseRepository['getAllOwn'] =async () => {
+  const responses = (await axiosInstance.get(`/rental-house/owner`)).data;
+  const results: RentalHouseModel[] = responses.map((response: any) => {
+    return {
+      id: response.id,
+      name: response.name,
+      address: response.address,
+      nearest_station: response.nearest_station,
+      max_floor_number: response.max_floor_number,
+      building_age: response.building_age,
+      //stringの配列にする
+      rental_house_photos: response.rental_house_photos.map((photo: Photo) => photo.image),
+      structure_type: Structure[response.structure_type_id],
+    }
+  })
+  return results;
 }
 
-export const rentalHouseRepository = {
+export const rentalHouseRepository: RentalHouseRepository = {
   create,
-  
+  getAllOwn
 }

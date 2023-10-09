@@ -8,7 +8,7 @@ import Link from "next/link";
 import { parseCookies } from "nookies";
 
 type Props = {
-  id: number;
+  id: string;
   houseName: string;
   img?: string;
   address: string;

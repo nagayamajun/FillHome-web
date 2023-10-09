@@ -1,4 +1,4 @@
 export type Photo = {
-  id?: string
-  image?: string;
+  id: string
+  image: string;
 }

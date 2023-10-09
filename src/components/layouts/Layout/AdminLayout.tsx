@@ -25,7 +25,7 @@ export const AdminLayout = ({ children }: Props) => {
   return (
     <div className="flex flex-row">
       <AdminSidebar />
-      <main className="flex flex-grow w-auto">{children}</main>
+      <main className="flex flex-grow min-h-screen h-full w-full justify-center bg-gray-50">{children}</main>
     </div>
   )
 }

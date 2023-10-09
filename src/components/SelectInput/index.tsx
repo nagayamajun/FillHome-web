@@ -7,7 +7,7 @@ type PlainInputProps = {
   labelText: string;
   placeholder?: string;
   onBlur?: FocusEventHandler<HTMLSelectElement> | undefined;
-  register?: UseFormRegister<FieldValues>;
+  register?: UseFormRegister<any>;
   registerValue: string;
   error?: string;
   defaultValue?: string | number;

@@ -3,7 +3,7 @@ import { UserLayout } from "@/components/layouts/Layout/UserLayout";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { ISR_REVALIDATE } from "@/constants/constants";
 import { SearchableRentalHouseList } from "@/feature/rentalHouse/page";
-import { rentalHoseRepository } from "@/feature/rentalHouse/modules/rentalHouse.repository";
+import { rentalHoseRepository } from "@/feature/rentalHouse/repositoties/rentalHouse.repository";
 
 
 export const getStaticProps: GetStaticProps = async () => {

@@ -1,7 +1,7 @@
 import { useLoading } from "@/hooks/useLoading";
 import { useEffect, useState } from "react";
 import { RentalHouse } from "../type/rentalHouse";
-import { rentalHoseRepository } from "../modules/rentalHouse.repository";
+import { rentalHoseRepository } from "../repositoties/rentalHouse.repository";
 
 export const useOwnRentalHouses = () => {
   const { showLoading, hideLoading } = useLoading();

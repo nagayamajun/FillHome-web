@@ -1,5 +1,7 @@
 import { RentalHouse } from "@/feature/rentalHouse/type/rentalHouse";
 import { Photo } from "@/type/photo";
+import { MansionRoomModel } from "../models/room.model";
+import { RentalHouseModel } from "@/feature/rentalHouse/models/rentalHouse.model";
 
 //Roomタイプの共通カラム
 export type BaseRoom = {
@@ -20,8 +22,6 @@ export type BaseRoom = {
 export type Layout = 
   '1R' | '1K' |'1DK' | '1LDK' | '2K' | '2DK' | '2LDK' | '3DK' 
   | '3LDK' | '4DK' | '4LDK' | 'その他';
-
-
   
 //マンションの中間テーブル
 export type Mansion = {
@@ -29,6 +29,7 @@ export type Mansion = {
   rental_house_id: string,
   mansion_rooms?: MansionRoom[]
 }
+
 //mansion_roomを作成する時の型
 export type CreateRoom = Omit<MansionRoom, 'id'> & { mansion_id: string}
 
@@ -40,7 +41,7 @@ export type MansionRoomsWithRentalHouse = {
   rentalHouse: RentalHouse; 
 };
 export type MansionRoomWithRentalHouse = {
-  mansion_room: MansionRoom; 
-  rental_house: RentalHouse; 
+  mansion_room: MansionRoomModel; 
+  rental_house: RentalHouseModel; 
 };
 

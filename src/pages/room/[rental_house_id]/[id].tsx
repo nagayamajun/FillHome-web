@@ -1,18 +1,16 @@
 import { ReactElement } from "react";
 import { UserLayout } from "@/components/layouts/Layout/UserLayout";
 import { GetServerSideProps } from "next";
-import { RoomDetail } from "@/feature/room/page/RoomDetail";
+import { RoomDetail } from "@/feature/room/components/detail/page";
 import { MansionRoomWithRentalHouse } from "@/feature/room/type/room";
-import { axiosInstance } from "@/lib/axios";
-import { useRouter } from "next/router";
-
+import { roomFactory } from "@/feature/room/models/room.model";
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   //queryを取得
-  const rental_house_id = context.query.rental_house_id;
-  const id =  context.query.id;
+  const rental_house_id = context.query.rental_house_id as string;
+  const id =  context.query.id as string;
 
-  const mansionRoomWithRentalHouse = (await axiosInstance.get(`/mansion-room/rental-house/${rental_house_id}/room/${id}`)).data;
+  const mansionRoomWithRentalHouse = await roomFactory().getOneWithHouse({id, rental_house_id});
 
   return {
     props: { mansionRoomWithRentalHouse },
@@ -24,8 +22,6 @@ type Props = {
 };
 
 const RoomWithHouseDetailPage = ({ mansionRoomWithRentalHouse }: Props): ReactElement => <RoomDetail roomWithRentalHouse={mansionRoomWithRentalHouse} />
-
-
 
 RoomWithHouseDetailPage.getLayout = (page: ReactElement) => <UserLayout>{page}</UserLayout>;
 

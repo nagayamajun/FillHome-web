@@ -18,6 +18,7 @@ export type RoutingType = {
   //user
   //room
   room: RoutingWithParams<{ roomId: number }>;
+  roomWithRentalHouse: RoutingWithParams<{ id: string, rental_house_id: string }>;
   //rentalHouse
   rentalHouses: RoutingWithNoParams;
   rentalHousesByHouseName: RoutingWithParams<{ houseName: string }>;

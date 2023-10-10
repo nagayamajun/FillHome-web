@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { MansionRoom } from "../type/room";
-import { roomRepository } from "../modules/room.repository";
+import { roomRepository } from "../repositories/rooms.repository";
 import { useLoading } from "@/hooks/useLoading";
 
 export const useMansionRoom = (room_id: string | undefined) => {

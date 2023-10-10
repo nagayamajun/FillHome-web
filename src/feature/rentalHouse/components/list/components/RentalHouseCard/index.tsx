@@ -39,7 +39,7 @@ export const RentalHouseCard = ({ id, houseName, img, address, rooms }: Props): 
       <div className="flex flex-col w-[320px] items-center space-y-2">
         {
           rooms?.map((room) => (
-            <OneRoomCard key={room.id} room={room} rental_houseId={id} />
+            <OneRoomCard key={room.id} room={room} rental_house_id={id} />
           ))
         }
       </div>

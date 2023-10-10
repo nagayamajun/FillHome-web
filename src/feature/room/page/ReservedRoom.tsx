@@ -10,7 +10,7 @@ import { PlainButton } from "@/components/Button";
 import { PlainInput } from "@/components/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CreateReservedRoomSchema, CreateRoomSchema } from "../type/schema";
-import { roomRepository } from "../modules/room.repository";
+import { roomRepository } from "../repositories/rooms.repository";
 import { useLoading } from "@/hooks/useLoading";
 import { useToast } from "@/hooks/useToast";
 

@@ -23,6 +23,16 @@ export const Routing: RoutingType = {
     pathName: 'room詳細',
   },
 
+  roomWithRentalHouse: {
+    buildRoute: ({id, rental_house_id}) => {
+      return {
+        id: 'roomWithRentalHouse',
+        path: `${roomPath}/${rental_house_id}/${id}`
+      }
+    },
+    pathName: 'roomと紐ずくhouseの取得'
+  },
+
   rentalHouses: {
     buildRoute: () => {
       return {

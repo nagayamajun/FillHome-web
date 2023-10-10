@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { CreateRoomSchema } from "../../type/schema";
 import { uploadFirebaseStorageAndReturnDownloadURLs } from "@/utils/firebase.utils";
-import { roomRepository } from "../../modules/room.repository";
+import { roomRepository } from "../../repositories/rooms.repository";
 import { useLoading } from "@/hooks/useLoading";
 import { useToast } from "@/hooks/useToast";
 import { useRouter } from "next/router";

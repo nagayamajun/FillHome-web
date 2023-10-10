@@ -13,3 +13,20 @@ export const SUCCESS_TO_RENTALHOUSE = '物件の作成に成功しました';
 export const FAIL_TO_CREATE_RENTAL_HOUSE = '物件の作成に失敗しました'
 
 export const FAIL_TO_CREATE_RESERVATION = '予約の作成に失敗しました。'
+
+// RentalHouseの情報
+export const MANSION_LABEL = 'マンション名';
+export const ADDRESS_LABEL = '住所';
+export const NEAREST_STATION_LABEL = '最寄駅';
+export const MAX_FLOOR_NUMBER_LABEL = '何階建';
+export const BUILDING_AGE_LABEL = '築年数';
+export const STRUCTURE_TYPE_LABEL = '建築構造'
+export const RENTAL_HOUSE_PHOTOS_LABEL = '物件写真の選択';
+
+export const MANSION = 'name';
+export const ADDRESS = 'address';
+export const NEAREST_STATION = 'nearest_station';
+export const MAX_FLOOR_NUMBER = 'max_floor_number';
+export const BUILDING_AGE = 'building_age';
+export const STRUCTURE_TYPE = 'structure_type_id'
+export const RENTAL_HOUSE_PHOTOS = 'rental_house_photos';

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLoading } from "@/hooks/useLoading";
 import { axiosInstance } from "@/lib/axios";
-import { rentalHoseRepository } from "@/feature/rentalHouse/modules/rentalHouse.repository";
+import { rentalHoseRepository } from "@/feature/rentalHouse/repositoties/rentalHouse.repository";
 import { RentalHouse } from "@/feature/rentalHouse/type/rentalHouse";
 
 export const useSpecificRentalHouseAndBelongingToRooms = (houseId?: string) => {

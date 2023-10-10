@@ -2,13 +2,14 @@ import { ReactElement } from "react";
 import { UserLayout } from "@/components/layouts/Layout/UserLayout";
 import { GetStaticProps, InferGetStaticPropsType } from "next";
 import { ISR_REVALIDATE } from "@/constants/constants";
-import { SearchableRentalHouseList } from "@/feature/rentalHouse/page";
-import { rentalHoseRepository } from "@/feature/rentalHouse/modules/rentalHouse.repository";
+import { SearchableRentalHouseList } from "@/feature/rentalHouse/components/list/page";
+import { rentalHoseRepository } from "@/feature/rentalHouse/repositoties/rentalHouse.repository";
+import { RentalHouseModel, rentalHouseFactory } from "@/feature/rentalHouse/models/rentalHouse.model";
 
 
 export const getStaticProps: GetStaticProps = async () => {
-  // TODO:  apiができたらデータフェッチする。
-  const fetchedRentalHouses = await rentalHoseRepository.getAll();
+
+  const fetchedRentalHouses = await rentalHouseFactory().getAll();
 
   return {
     props: { fetchedRentalHouses },
@@ -17,7 +18,7 @@ export const getStaticProps: GetStaticProps = async () => {
 };
 
 type Props = {
-  fetchedRentalHouses: InferGetStaticPropsType<typeof getStaticProps>;
+  fetchedRentalHouses: RentalHouseModel[];
 };
 
 const RentalHousesPage = ({ fetchedRentalHouses }: Props): ReactElement => (

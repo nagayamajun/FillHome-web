@@ -1,6 +1,5 @@
 import { useLoading } from "@/hooks/useLoading";
 import { useEffect, useState } from "react";
-import { rentalHouseRepository } from "../../../repositoties/rentalHouse.repository";
 import { toast } from "react-toastify";
 import { FAIL_TO_GET_RENTALHOUSE } from "@/constants/messages";
 import { RentalHouseModel, rentalHouseFactory } from "@/feature/rentalHouse/models/rentalHouse.model";

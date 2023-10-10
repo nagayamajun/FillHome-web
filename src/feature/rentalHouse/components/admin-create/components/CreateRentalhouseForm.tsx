@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { useCreateRentalHouse } from "../hooks/useCreateRentalHouse";
 import { Routing } from "@/Routing/routing";
 import { useRouter } from "next/router";
-import { ADDRESS, ADDRESS_LABEL, BUILDING_AGE, BUILDING_AGE_LABEL, MANSION, MANSION_LABEL, MAX_FLOOR_NUMBER, MAX_FLOOR_NUMBER_LABEL, NEAREST_STATION, NEAREST_STATION_LABEL, RENTAL_HOUSE_PHOTOS, RENTAL_HOUSE_PHOTOS_LABEL, STRUCTURE_TYPE, STRUCTURE_TYPE_LABEL } from "@/constants/messages";
+import { ADDRESS, ADDRESS_LABEL, BUILDING_AGE, BUILDING_AGE_LABEL, MANSION, MANSION_LABEL, MAX_FLOOR_NUMBER, MAX_FLOOR_NUMBER_LABEL, NEAREST_STATION, NEAREST_STATION_LABEL, RENTAL_HOUSE_PHOTOS, RENTAL_HOUSE_PHOTOS_LABEL, STRUCTURE_TYPE, STRUCTURE_TYPE_LABEL } from "@/constants/const";
 import { RentalHouseSchema, RentalSchemaType } from "../../../type";
 
 export const CreateRentalHouseForm = () => {

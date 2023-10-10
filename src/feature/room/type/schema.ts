@@ -1,4 +1,4 @@
-import { REQUIRE_FIELD } from "@/constants/messages";
+import { REQUIRE_FIELD, TEN_OR_ELEVEN_CHARACTERS_PHONE_NUMBER } from "@/constants/messages";
 import * as z from "zod";
 
 //SignUpのschema
@@ -25,7 +25,7 @@ export const CreateReservedRoomSchema = z.object({
     const length = phoneNumber.replace(/[-()\s]/g, "").length;
     return length === 10 || length === 11;
   }, {
-    message: "Phone number must be 10 or 11 digits",
+    message: TEN_OR_ELEVEN_CHARACTERS_PHONE_NUMBER,
   }),
   email: z.string().min(1, REQUIRE_FIELD),
   address: z.string().min(1, REQUIRE_FIELD),

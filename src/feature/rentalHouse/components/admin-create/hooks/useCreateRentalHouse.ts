@@ -4,14 +4,15 @@ import { toast } from "react-toastify";
 import { RentalSchemaType } from "../../../type";
 import { rentalHouseFactory } from "@/feature/rentalHouse/models/rentalHouse.model";
 import { FAIL_TO_CREATE_RENTAL_HOUSE, SUCCESS_TO_RENTALHOUSE } from "@/constants/messages";
+import { useNotice } from "@/hooks/useNotice";
 
 export const useCreateRentalHouse = () => {
   const { showLoading, hideLoading } = useLoading();
+  const notice = useNotice();
 
   const handleCreate = async(data: RentalSchemaType) => {
-    showLoading();
-
     try {
+      showLoading();
       //MUST: BEにFILEの責務を移動する
       const urls = await uploadFirebaseStorageAndReturnDownloadURLs({
         files: data.rental_house_photos, destinationPath: 'rentalHousePhotos'
@@ -28,12 +29,12 @@ export const useCreateRentalHouse = () => {
       });
 
       hideLoading();
-      toast.success(SUCCESS_TO_RENTALHOUSE)
+      notice.success(SUCCESS_TO_RENTALHOUSE)
       return response
     } catch (error: unknown) {
       const isTypeSafeError = error instanceof Error;
       hideLoading();
-      toast.error(`${FAIL_TO_CREATE_RENTAL_HOUSE}\n${isTypeSafeError && error.message}`)
+      notice.error(`${FAIL_TO_CREATE_RENTAL_HOUSE}\n${isTypeSafeError && error.message}`)
     }
   }
 

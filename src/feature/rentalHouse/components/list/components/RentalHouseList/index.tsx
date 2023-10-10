@@ -1,12 +1,12 @@
 import { useRouter } from "next/router"
-import { RentalHouse } from "../../type/rentalHouse"
+import { RentalHouse } from "../../../../type/rentalHouse"
 import { RentalHouseCard } from "../RentalHouseCard"
+import { RentalHouseModel } from "@/feature/rentalHouse/models/rentalHouse.model"
+import { useMemo } from "react"
 
-import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid'
 
 export type Props = {
-  rentalHouses: RentalHouse[]
+  rentalHouses: RentalHouseModel[]
 }
 
 export const RentalHouseList = ({ rentalHouses }: Props): JSX.Element => {
@@ -14,16 +14,16 @@ export const RentalHouseList = ({ rentalHouses }: Props): JSX.Element => {
   if (!rentalHouses.length) return <p>投稿が存在しません</p>;
 
   // queryの値と部分一致
-  const filteredHouses = rentalHouses.filter((house) => {
+  const filteredHouses = useMemo(() => rentalHouses.filter((house) => {
      if (query.houseName) {
       return house.name.includes(query.houseName as string);
      } else {
       return rentalHouses
      }
-  });
+  }), [query]);
 
   return (
-    <div className="mt-8 flex flex-col gap-8">
+    <div className="mt-8 flex flex-col gap-8 md:grid-cols-2">
       {
         filteredHouses.map((house) => {
           return (
@@ -31,7 +31,7 @@ export const RentalHouseList = ({ rentalHouses }: Props): JSX.Element => {
               id={house.id}
               key={house.id} 
               houseName={house.name}
-              img={house.rental_house_photos[0]?.image}
+              img={house.rental_house_photos[0]}
               address={house.address}
               rooms={house.mansion?.mansion_rooms}
             />

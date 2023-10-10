@@ -1,4 +1,4 @@
-import { useOwnRentalHouses } from "@/feature/rentalHouse/component/admin-list/hooks/useOwnRentalHouses";
+import { useOwnRentalHouses } from "@/feature/rentalHouse/components/admin-list/hooks/useOwnRentalHouses";
 import { BelongToOwnerRentalHouseList } from "../components/AdminBelongToOwnerRentalHouseList"
 import { PlainTitle } from "@/components/TItile/PlainTitle";
 

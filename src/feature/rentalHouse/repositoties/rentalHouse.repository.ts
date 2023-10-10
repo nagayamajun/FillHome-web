@@ -2,7 +2,7 @@ import { axiosInstance } from "@/lib/axios";
 import { FAIL_TO_CREATE_RENTAL_HOUSE, FAIL_TO_GET_RENTALHOUSE, FAIL_TO_GET_ROOMS_WITH_RENTALHOUSE, SUCCESS_TO_RENTALHOUSE } from "@/constants/messages";
 import { ReRentalHouse, RentalHouse, Structure } from "../type/rentalHouse";
 import { ToastResult } from "@/type/toast";
-import { CreateRentalHouse } from "../component/admin-create/type";
+import { CreateRentalHouse } from "../components/admin-create/type";
 import { Photo } from "@/type/photo";
 import { RentalHouseModel } from "../models/rentalHouse.model";
 
@@ -82,6 +82,7 @@ export const rentalHoseRepository = {
 export type RentalHouseRepository = {
   create: (input: CreateRentalHouse) => Promise<RentalHouseModel>,
   getAllOwn: () => Promise<RentalHouseModel[]>,
+  getAll: () => Promise<RentalHouseModel[]>
 };
 
 const create: RentalHouseRepository['create'] = async(
@@ -106,8 +107,8 @@ const create: RentalHouseRepository['create'] = async(
 };
 
 const getAllOwn: RentalHouseRepository['getAllOwn'] =async () => {
-  const responses = (await axiosInstance.get(`/rental-house/owner`)).data;
-  const results: RentalHouseModel[] = responses.map((response: any) => {
+  const response = (await axiosInstance.get(`/rental-house/owner`)).data;
+  const results: RentalHouseModel[] = response.map((response: any) => {
     return {
       id: response.id,
       name: response.name,
@@ -115,7 +116,6 @@ const getAllOwn: RentalHouseRepository['getAllOwn'] =async () => {
       nearest_station: response.nearest_station,
       max_floor_number: response.max_floor_number,
       building_age: response.building_age,
-      //stringの配列にする
       rental_house_photos: response.rental_house_photos.map((photo: Photo) => photo.image),
       structure_type: Structure[response.structure_type_id],
     }
@@ -123,7 +123,27 @@ const getAllOwn: RentalHouseRepository['getAllOwn'] =async () => {
   return results;
 }
 
+const getAll: RentalHouseRepository['getAll'] =async () => {
+  const response = (await axiosInstance.get('/rental-house')).data;
+  console.log("responseの確認", response)
+  const results: RentalHouseModel[] = response.map((response: any) => {
+    return {
+      id: response.id,
+      name: response.name,
+      address: response.address,
+      nearest_station: response.nearest_station,
+      max_floor_number: response.max_floor_number,
+      building_age: response.building_age,
+      rental_house_photos: response.rental_house_photos.map((photo: Photo) => photo.image),
+      structure_type: Structure[response.structure_type],
+      mansion: response.mansion
+    }
+  })
+  return results;
+}
+
 export const rentalHouseRepository: RentalHouseRepository = {
   create,
-  getAllOwn
+  getAllOwn,
+  getAll
 }

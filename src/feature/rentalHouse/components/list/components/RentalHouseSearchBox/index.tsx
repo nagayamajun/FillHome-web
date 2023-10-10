@@ -12,8 +12,8 @@ export const RentalHouseSearchBox = (): JSX.Element => {
     handleFiltered(houseName);
   }
 
+  //  TODO: BEにロジックを移行する
   // paramsに条件を追加する関数
-  // 条件が増えた時の事を考え,switch文使用
   const handleFiltered = useCallback((houseName?: string) => {
     switch (true) {
       case !!houseName:

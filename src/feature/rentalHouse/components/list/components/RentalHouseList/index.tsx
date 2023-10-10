@@ -1,5 +1,4 @@
 import { useRouter } from "next/router"
-import { RentalHouse } from "../../../../type/rentalHouse"
 import { RentalHouseCard } from "../RentalHouseCard"
 import { RentalHouseModel } from "@/feature/rentalHouse/models/rentalHouse.model"
 import { useMemo } from "react"
@@ -23,7 +22,8 @@ export const RentalHouseList = ({ rentalHouses }: Props): JSX.Element => {
   }), [query]);
 
   return (
-    <div className="mt-8 flex flex-col gap-8 md:grid-cols-2">
+    <div className="flex flex-col md:w-2/3 justify-center items-center">
+    <div className="grid gap-y-8 md:grid-cols-2 mt-8 justify-items-center items-center">
       {
         filteredHouses.map((house) => {
           return (
@@ -38,6 +38,7 @@ export const RentalHouseList = ({ rentalHouses }: Props): JSX.Element => {
           )
         })
       }
+    </div>
     </div>
   )
 }

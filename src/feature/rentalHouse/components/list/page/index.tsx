@@ -8,11 +8,11 @@ type Props = {
 
 export const SearchableRentalHouseList = ({ rentalHouses }: Props): JSX.Element => {
   return (
-    <>
+    <div className="flex flex-col items-center w-full min-h-screen h-full">
       <RentalHouseSearchBox />
       <RentalHouseList
         rentalHouses={rentalHouses}
       />
-    </>
+    </div>
   )
 };

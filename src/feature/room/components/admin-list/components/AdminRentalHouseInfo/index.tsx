@@ -1,20 +1,30 @@
 import Image from "next/image";
-import { Structure, StructureType } from "../../../../../rentalHouse/type/rentalHouse";
+import {
+  Structure,
+  StructureType,
+} from "../../../../../rentalHouse/type/rentalHouse";
 import { Layout } from "@/feature/room/type/room";
 
 type Props = {
-  id: string,
-  name: string,
-  address: string,
-  nearest_station: string,
-  max_floor_number: number,
-  building_age: number,
-  rental_house_photos: string, 
-  structure_type: StructureType,
-}
+  id: string;
+  name: string;
+  address: string;
+  nearest_station: string;
+  max_floor_number: number;
+  building_age: number;
+  rental_house_photos: string;
+  structure_type: StructureType;
+};
 
 export const AdminRentalHouseInfo = ({
-  id, name, address, nearest_station, structure_type, max_floor_number,building_age, rental_house_photos
+  id,
+  name,
+  address,
+  nearest_station,
+  structure_type,
+  max_floor_number,
+  building_age,
+  rental_house_photos,
 }: Props) => (
   <>
     <div className="w-sm md:w-md lg:w-lg h-[320px] lg:h-[400px] relative">
@@ -54,4 +64,4 @@ export const AdminRentalHouseInfo = ({
       </div>
     </div>
   </>
-)
+);

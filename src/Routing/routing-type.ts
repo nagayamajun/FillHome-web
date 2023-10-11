@@ -1,24 +1,26 @@
-
 export type Route = {
   id: keyof RoutingType;
-  path: string; 
-}
+  path: string;
+};
 
 type RoutingWithParams<T> = {
   buildRoute: (params: T) => Route;
   pathName: string;
-}
+};
 
 type RoutingWithNoParams = {
   buildRoute: () => Route;
   pathName: string;
-}
+};
 
 export type RoutingType = {
   //user
   //room
   room: RoutingWithParams<{ roomId: number }>;
-  roomWithRentalHouse: RoutingWithParams<{ id: string, rental_house_id: string }>;
+  roomWithRentalHouse: RoutingWithParams<{
+    id: string;
+    rental_house_id: string;
+  }>;
   //rentalHouse
   rentalHouses: RoutingWithNoParams;
   rentalHousesByHouseName: RoutingWithParams<{ houseName: string }>;
@@ -36,4 +38,4 @@ export type RoutingType = {
 
   //reserved
   reservedRoom: RoutingWithParams<{ mansion_room_id: string }>;
-}
+};

@@ -5,7 +5,7 @@ export const ToastState = atom<Toast>({
   key: "ToastState",
   default: {
     isShown: false,
-    message: '',
-    style: 'success'
+    message: "",
+    style: "success",
   },
 });

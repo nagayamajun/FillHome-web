@@ -1,8 +1,10 @@
 import { UserLayout } from "@/components/layouts/Layout/UserLayout";
-import { ReservedMansionRoom } from "@/feature/reserve/page/ReservedRoom"
+import { ReservedMansionRoom } from "@/feature/reserve/page/ReservedRoom";
 import { ReactElement } from "react";
 
-const ReservedMansionRoomPage = () => <ReservedMansionRoom/>
+const ReservedMansionRoomPage = () => <ReservedMansionRoom />;
 
-ReservedMansionRoomPage.getLayout = (page: ReactElement) => <UserLayout>{page}</UserLayout>;
-export default ReservedMansionRoomPage
+ReservedMansionRoomPage.getLayout = (page: ReactElement) => (
+  <UserLayout>{page}</UserLayout>
+);
+export default ReservedMansionRoomPage;

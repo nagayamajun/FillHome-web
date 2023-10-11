@@ -9,15 +9,15 @@ const config: StorybookConfig = {
     "@storybook/addon-onboarding",
     "@storybook/addon-interactions",
     {
-      name: '@storybook/addon-postcss',
+      name: "@storybook/addon-postcss",
       options: {
         postcssLoaderOptions: {
-          implementation: require('postcss'),
+          implementation: require("postcss"),
         },
       },
-    }
+    },
   ],
-  staticDirs: ['../public'],
+  staticDirs: ["../public"],
   framework: {
     name: "@storybook/nextjs",
     options: {},

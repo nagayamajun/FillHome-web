@@ -17,6 +17,12 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/feature/owner/type", "src/feature/room/type"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "src/feature/owner/type",
+    "src/feature/room/type"
+  ],
   "exclude": ["node_modules"]
 }

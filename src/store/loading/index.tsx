@@ -5,6 +5,6 @@ export const LoadingState = atom<Loading>({
   key: "LoadingState",
   default: {
     isLoading: false,
-    message: null
+    message: null,
   },
 });

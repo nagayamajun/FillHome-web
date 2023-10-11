@@ -18,4 +18,4 @@ export const useNotice = (): NoticeType => {
       error: (title?: string, error?: unknown) => toast.error(title ?? ERROR),
     };
   }, []);
-}
+};

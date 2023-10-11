@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: false,
   images: {
-    domains: ['firebasestorage.googleapis.com'], 
+    domains: ["firebasestorage.googleapis.com"],
     remotePatterns: [
       {
         protocol: "http",
@@ -14,11 +14,10 @@ const nextConfig = {
       },
       {
         protocol: "http",
-        hostname: 'firebasestorage.googleapis.com',
+        hostname: "firebasestorage.googleapis.com",
       },
     ],
   },
 };
 
 module.exports = nextConfig;
-

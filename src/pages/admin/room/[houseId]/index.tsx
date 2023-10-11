@@ -5,6 +5,8 @@ import { ReactElement } from "react";
 //rentalHouse一件に紐ずくroom一覧取得
 const RoomListPage = (): JSX.Element => <RoomListBelongToOwnerHose />;
 
-RoomListPage.getLayout = (page: ReactElement) => <AdminLayout>{page}</AdminLayout>;
+RoomListPage.getLayout = (page: ReactElement) => (
+  <AdminLayout>{page}</AdminLayout>
+);
 
 export default RoomListPage;

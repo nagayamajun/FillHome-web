@@ -1,6 +1,6 @@
 import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from '@fullcalendar/daygrid'
-import interactionPlugin from '@fullcalendar/interaction';
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
 import { useRouter } from "next/router";
 import { useMansionRoom } from "../hooks/useMansionRoom";
 import { useMemo, useState } from "react";
@@ -18,39 +18,48 @@ export const ReservedMansionRoom = (): JSX.Element => {
   const router = useRouter();
   const { mansion_room_id } = router.query;
   const { mansionRoom } = useMansionRoom(mansion_room_id as string);
-  const { handleSubmit, register, formState: {errors}, setValue, } = useForm({
-    resolver: zodResolver(CreateReservedRoomSchema)
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+    setValue,
+  } = useForm({
+    resolver: zodResolver(CreateReservedRoomSchema),
   });
   const { showLoading, hideLoading } = useLoading();
   const { showToast, hideToast } = useToast();
-  
+
   //available_dateからeventを作成
   const events = useMemo(() => {
     return mansionRoom?.available_dates?.map((dateString: any) => {
       return {
-        title: '予約可能日',
+        title: "予約可能日",
         start: dateString,
       };
     });
   }, [mansionRoom]);
 
-  const onsubmit = async(data: any) => {
+  const onsubmit = async (data: any) => {
     showLoading();
 
-    await roomRepository.reserveRoom({
-      input: data, mansion_room_id: mansionRoom?.id!
-    }).then(({ style, message }) => {
-      showToast({ style, message })
-      setTimeout(() => {
-        hideToast();
-        // router.reload()
-      }, 4000)
-      hideLoading();
-    }).catch((error) => {
-      hideLoading();
-      throw error
-    })
-  }
+    await roomRepository
+      .reserveRoom({
+        input: data,
+        mansion_room_id: mansionRoom?.id!,
+      })
+      .then(({ style, message }) => {
+        showToast({ style, message });
+        setTimeout(() => {
+          hideToast();
+          // router.reload()
+        }, 4000);
+        hideLoading();
+      })
+      .catch((error) => {
+        hideLoading();
+        throw error;
+      });
+  };
 
   return (
     <div className="flex items-center justify-center">
@@ -61,24 +70,24 @@ export const ReservedMansionRoom = (): JSX.Element => {
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin]}
           headerToolbar={{
-            start: 'prev,next',
-            center: 'title',
-            end: 'dayGridMonth,dayGridWeek',
+            start: "prev,next",
+            center: "title",
+            end: "dayGridMonth,dayGridWeek",
           }}
           locale="ja" // 日本語化
           selectable={true}
           selectMirror={true}
           selectOverlap={false}
-          eventDurationEditable={true} 
+          eventDurationEditable={true}
           events={events}
           eventClick={(clickInfo) => {
             const eventDate = clickInfo.event.start;
-            const stay_date =  eventDate?.toISOString().split('T')[0];
-            setValue('stay_date', stay_date)
+            const stay_date = eventDate?.toISOString().split("T")[0];
+            setValue("stay_date", stay_date);
             // setSelectedDate(eventDate)
           }}
         />
-        
+
         <div className="flex ">
           <PlainInput
             label="苗字"
@@ -122,12 +131,8 @@ export const ReservedMansionRoom = (): JSX.Element => {
           error={errors.email?.message as string}
         />
 
-        <PlainButton
-          innerText="作成"
-          type="submit"
-        />
+        <PlainButton innerText="作成" type="submit" />
       </form>
-      
     </div>
   );
-}
+};

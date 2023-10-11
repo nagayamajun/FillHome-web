@@ -3,7 +3,7 @@ import { FocusEventHandler } from "react";
 import { UseFormRegister } from "react-hook-form";
 
 //このPlainInputで対応できるtype
-type InputType = 'text' | 'password' | 'tel' | 'email' | 'number';
+type InputType = "text" | "password" | "tel" | "email" | "number";
 
 type Props = {
   label: string;
@@ -17,13 +17,13 @@ type Props = {
   disabled?: boolean;
   labelClassName?: string;
   inputClassName?: string;
-}
+};
 
 export const PlainInput = ({
   registerValue,
   label,
   inputType,
-  placeholder = '',
+  placeholder = "",
   register,
   error,
   defaultValue,
@@ -33,27 +33,23 @@ export const PlainInput = ({
   inputClassName,
 }: Props): JSX.Element => (
   <div className="flex flex-col gap-1 w-full">
-    <label htmlFor={registerValue} className={labelClassName} >
+    <label htmlFor={registerValue} className={labelClassName}>
       {label}
     </label>
-    <input 
+    <input
       id={registerValue}
       className={
         "border border-gray-300 rounded-md shadow-sm p-2 sm:p-3 w-full focus:outline-pink-color " +
         inputClassName
       }
       {...(register && register(registerValue ?? ""))}
-      type={inputType} 
+      type={inputType}
       placeholder={placeholder}
       disabled={disabled}
       defaultValue={defaultValue}
       onBlur={onBlur}
     />
 
-    {error && (
-      <ErrorText 
-        errorText={error}
-      />
-    )}
+    {error && <ErrorText errorText={error} />}
   </div>
-)
+);

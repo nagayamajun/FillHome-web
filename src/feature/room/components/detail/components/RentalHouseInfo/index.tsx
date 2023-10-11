@@ -1,13 +1,27 @@
-import Image from "next/image"
-import { RentalHouseModel } from "@/feature/rentalHouse/models/rentalHouse.model"
-import { ADDRESS_LABEL, BUILDING_AGE_LABEL, MAX_FLOOR_NUMBER_LABEL, NEAREST_STATION_LABEL, STRUCTURE_TYPE_LABEL } from "@/constants/const"
+import Image from "next/image";
+import { RentalHouseModel } from "@/feature/rentalHouse/models/rentalHouse.model";
+import {
+  ADDRESS_LABEL,
+  BUILDING_AGE_LABEL,
+  MAX_FLOOR_NUMBER_LABEL,
+  NEAREST_STATION_LABEL,
+  STRUCTURE_TYPE_LABEL,
+} from "@/constants/const";
 
 type Props = {
-  rentalHouse: RentalHouseModel
-}
+  rentalHouse: RentalHouseModel;
+};
 
 export const RentalHouseInfo = ({
-  rentalHouse: { name, address, nearest_station, max_floor_number, building_age, rental_house_photos, structure_type }
+  rentalHouse: {
+    name,
+    address,
+    nearest_station,
+    max_floor_number,
+    building_age,
+    rental_house_photos,
+    structure_type,
+  },
 }: Props): JSX.Element => (
   <div className="flex flex-col space-y-8 w-full items-center">
     <div className="w-full h-80 relative">
@@ -46,4 +60,4 @@ export const RentalHouseInfo = ({
       </div>
     </div>
   </div>
-)
+);

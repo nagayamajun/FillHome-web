@@ -1,4 +1,8 @@
-import { EIGHT_CHARACTERS_OR_MORE, INVALID_EMAIL_FORMAT_MESSAGE, REQUIRE_FIELD } from "@/constants/messages";
+import {
+  EIGHT_CHARACTERS_OR_MORE,
+  INVALID_EMAIL_FORMAT_MESSAGE,
+  REQUIRE_FIELD,
+} from "@/constants/messages";
 import * as z from "zod";
 
 //SignUpのschema

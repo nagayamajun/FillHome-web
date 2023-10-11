@@ -2,7 +2,6 @@ import { ErrorText } from "@/components/ErrorText";
 import { FocusEventHandler, ReactNode } from "react";
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 
-
 type PlainInputProps = {
   labelText: string;
   placeholder?: string;
@@ -27,8 +26,6 @@ export const PlainSelectInput = ({
   inputFont = "text-sm",
   children, // childrenプロパティを受け取る
 }: PlainInputProps): JSX.Element => {
-
-
   return (
     <div className="flex flex-col gap-1 mb-4 w-full">
       <label htmlFor={registerValue} className={labelFont}>
@@ -44,14 +41,10 @@ export const PlainSelectInput = ({
           inputFont
         }
       >
-        {children} 
+        {children}
       </select>
 
-      {error && (
-        <ErrorText 
-          errorText={error}
-        />
-      )}
+      {error && <ErrorText errorText={error} />}
     </div>
   );
 };

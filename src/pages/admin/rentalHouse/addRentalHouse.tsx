@@ -4,6 +4,8 @@ import { ReactElement } from "react";
 
 const AddRentalHousePage = (): JSX.Element => <AddRentalHouse />;
 
-AddRentalHousePage.getLayout = (page: ReactElement) => <AdminLayout>{page}</AdminLayout>;
+AddRentalHousePage.getLayout = (page: ReactElement) => (
+  <AdminLayout>{page}</AdminLayout>
+);
 
 export default AddRentalHousePage;

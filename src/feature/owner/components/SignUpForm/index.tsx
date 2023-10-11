@@ -1,5 +1,5 @@
-import { PlainButton } from "@/components/Button"
-import { PlainInput } from "@/components/Input"
+import { PlainButton } from "@/components/Button";
+import { PlainInput } from "@/components/Input";
 import { useForm } from "react-hook-form";
 import { authRepository } from "../../modules/auth.repository";
 import { ToastResult } from "@/type/toast";
@@ -13,32 +13,40 @@ import { setAuthToken } from "@/lib/axios";
 
 export const SignUpForm = () => {
   const router = useRouter();
-  const { handleSubmit, register, formState: {errors}} = useForm({
-    resolver: zodResolver(signUpInputSchema)
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(signUpInputSchema),
   });
 
   const { showToast, hideToast } = useToast();
   const { setOwner } = useCertainOwner();
 
   const onSubmit = (createData: any): void => {
-    authRepository.signUp(createData)
+    authRepository
+      .signUp(createData)
       .then(({ data, style, message }: ToastResult) => {
         showToast({ message, style });
         setTimeout(() => {
           hideToast();
-          if (style === 'success') {
+          if (style === "success") {
             //headerに認証情報を追加する
             setAuthToken(data.token);
             setOwner(data);
 
-            router.push(Routing.adminRentalHouses.buildRoute().path)
+            router.push(Routing.adminRentalHouses.buildRoute().path);
           }
-        }, 3000)
-      })
+        }, 3000);
+      });
   };
-  
+
   return (
-    <form className="flex flex-col w-md space-y-2" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className="flex flex-col w-md space-y-2"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <h2 className="font-bold text-xl text-center mb-2">Fill Home</h2>
       <PlainInput
         label="メールアドレス"
@@ -49,7 +57,7 @@ export const SignUpForm = () => {
       />
       <PlainInput
         label="パスワード"
-        {...register('password')}
+        {...register("password")}
         register={register}
         registerValue="password"
         inputType="password"
@@ -82,10 +90,7 @@ export const SignUpForm = () => {
         inputType="tel"
         error={errors?.phone_number?.message as string}
       />
-      <PlainButton 
-        innerText="新規登録"
-        type="submit"
-      />
+      <PlainButton innerText="新規登録" type="submit" />
     </form>
-  )
-}
+  );
+};

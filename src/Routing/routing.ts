@@ -1,111 +1,120 @@
 import { RoutingType } from "./routing-type";
 
 // user
-export const roomPath = '/room';
-export const rentalHousePath = '/rentalHouse';
-export const reservePath = '/reserve'
+export const roomPath = "/room";
+export const rentalHousePath = "/rentalHouse";
+export const reservePath = "/reserve";
 
 // admin
-export const baseAdminPath = '/admin'
-export const adminOwnerPath = `${baseAdminPath}/owner`
-export const adminRentalHousePath = `${baseAdminPath}${rentalHousePath}`
-export const adminRoomPath = `${baseAdminPath}${roomPath}`
+export const baseAdminPath = "/admin";
+export const adminOwnerPath = `${baseAdminPath}/owner`;
+export const adminRentalHousePath = `${baseAdminPath}${rentalHousePath}`;
+export const adminRoomPath = `${baseAdminPath}${roomPath}`;
 
-// pathをここに追加していく。　
+// pathをここに追加していく。
 export const Routing: RoutingType = {
   room: {
     buildRoute: ({ roomId }) => {
       return {
-        id: 'room', 
-        path: `${roomPath}/${roomId}`
-      }
+        id: "room",
+        path: `${roomPath}/${roomId}`,
+      };
     },
-    pathName: 'room詳細',
+    pathName: "room詳細",
+  },
+
+  roomWithRentalHouse: {
+    buildRoute: ({ id, rental_house_id }) => {
+      return {
+        id: "roomWithRentalHouse",
+        path: `${roomPath}/${rental_house_id}/${id}`,
+      };
+    },
+    pathName: "roomと紐ずくhouseの取得",
   },
 
   rentalHouses: {
     buildRoute: () => {
       return {
-        id: 'rentalHouses',
-        path: `${rentalHousePath}`
-      }
+        id: "rentalHouses",
+        path: `${rentalHousePath}`,
+      };
     },
-    pathName: 'rentalHouseの一覧'
+    pathName: "rentalHouseの一覧",
   },
   rentalHousesByHouseName: {
     buildRoute: ({ houseName }) => {
       return {
-        id: 'rentalHousesByHouseName',
-        path: `${rentalHousePath}?houseName=${houseName}`
-      }
+        id: "rentalHousesByHouseName",
+        path: `${rentalHousePath}?houseName=${houseName}`,
+      };
     },
-    pathName: 'rentalHouseをhotelNameで条件検索'
+    pathName: "rentalHouseをhotelNameで条件検索",
   },
 
   ownerSignUp: {
     buildRoute: () => {
       return {
-        id: 'ownerSignUp',
-        path: `${adminOwnerPath}/signUp`
-      }
+        id: "ownerSignUp",
+        path: `${adminOwnerPath}/signUp`,
+      };
     },
-    pathName: 'ownerのサインアップ'
+    pathName: "ownerのサインアップ",
   },
   ownerSignIn: {
     buildRoute: () => {
       return {
-        id: 'ownerSignUp',
-        path: `${adminOwnerPath}/signIn`
-      }
+        id: "ownerSignUp",
+        path: `${adminOwnerPath}/signIn`,
+      };
     },
-    pathName: 'ownerのサインイン'
+    pathName: "ownerのサインイン",
   },
 
   adminRentalHouses: {
     buildRoute: () => {
       return {
-        id: 'adminRentalHouses',
-        path: `${adminRentalHousePath}`
-      }
+        id: "adminRentalHouses",
+        path: `${adminRentalHousePath}`,
+      };
     },
-    pathName: 'ownerに所属するhouseの一覧'
+    pathName: "ownerに所属するhouseの一覧",
   },
   addRentalHouse: {
     buildRoute: () => {
       return {
-        id: 'addRentalHouse',
-        path: `${adminRentalHousePath}/addRentalHouse`
-      }
+        id: "addRentalHouse",
+        path: `${adminRentalHousePath}/addRentalHouse`,
+      };
     },
-    pathName: 'ownerのhouseの作成'
+    pathName: "ownerのhouseの作成",
   },
   adminRoomsBelongToHouse: {
     buildRoute: ({ houseId }) => {
       return {
-        id: 'adminRoomsBelongToHouse',
-        path:  `${adminRoomPath}/${houseId}`
-      }
+        id: "adminRoomsBelongToHouse",
+        path: `${adminRoomPath}/${houseId}`,
+      };
     },
-    pathName: 'houseに紐ずくroomリスト'
+    pathName: "houseに紐ずくroomリスト",
   },
   adminAddRoomBelongToHouse: {
     buildRoute: ({ houseId }) => {
       return {
-        id: 'adminAddRoomBelongToHouse',
-        path: `${adminRoomPath}/${houseId}/addRoom`
-      }
+        id: "adminAddRoomBelongToHouse",
+        path: `${adminRoomPath}/${houseId}/addRoom`,
+      };
     },
-    pathName: 'houseに紐ずくroom作成'
+    pathName: "houseに紐ずくroom作成",
   },
 
-  reservedRoom : {
+  reservedRoom: {
     buildRoute: ({ mansion_room_id }) => {
       return {
-        id: 'reservedRoom',
-        path: `${reservePath}/${mansion_room_id}`
-      }
+        id: "reservedRoom",
+        path: `${reservePath}/${mansion_room_id}`,
+      };
     },
-    pathName: 'room予約ページ'
-  }
-
-}
+    pathName: "room予約ページ",
+  },
+};

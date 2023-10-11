@@ -3,7 +3,6 @@ import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import { useRecoilValue } from "recoil";
 
-
 export const ToastModal: React.FC = (): JSX.Element => {
   const { isShown, message, style } = useRecoilValue(ToastState);
   return (
@@ -35,7 +34,7 @@ export const ToastModal: React.FC = (): JSX.Element => {
               >
                 <Dialog.Panel
                   className={` max-w-md transform overflow-hidden rounded-lg px-6 py-3 text-left align-middle shadow-xl transition-all bg-green-400 ${
-                    style === 'success' ? "bg-green-400" : "bg-red-400"
+                    style === "success" ? "bg-green-400" : "bg-red-400"
                   }`}
                 >
                   <div className="flex items-center justify-center p-1">

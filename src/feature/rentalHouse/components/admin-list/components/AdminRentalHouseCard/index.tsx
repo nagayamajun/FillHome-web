@@ -7,13 +7,16 @@ type Props = {
   houseName: string;
   img: string;
   address: string;
-}
+};
 
-export const AdminRentalHouseCard = ({ id, houseName, img, address }: Props): JSX.Element => (
+export const AdminRentalHouseCard = ({
+  id,
+  houseName,
+  img,
+  address,
+}: Props): JSX.Element => (
   <section className="flex flex-col w-full sm:p-4 xl:p-8 items-center space-y-4 rounded-lg">
-    <figure 
-      style={{ position: 'relative', width: '100%', height: '320px' }}
-    >
+    <figure style={{ position: "relative", width: "100%", height: "320px" }}>
       <Image
         className="rounded-lg"
         src={img}

@@ -1,7 +1,5 @@
-import { OwnerSignIn } from "@/feature/owner/page/SignIn"
+import { OwnerSignIn } from "@/feature/owner/page/SignIn";
 
+const OwnerSignInPage = (): JSX.Element => <OwnerSignIn />;
 
-const OwnerSignInPage = (): JSX.Element => <OwnerSignIn />
-
-
-export default OwnerSignInPage
+export default OwnerSignInPage;

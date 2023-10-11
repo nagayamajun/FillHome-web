@@ -174,12 +174,8 @@
 //   },
 // ];
 
-
-
-
-
 // //roomとそこに紐ずくroomを取得
-// export const fetchedRentalHousesWithRoom: MansionRoomsWithRentalHouse = 
+// export const fetchedRentalHousesWithRoom: MansionRoomsWithRentalHouse =
 //   {
 //     rentalHouse: {
 //       id: 1,

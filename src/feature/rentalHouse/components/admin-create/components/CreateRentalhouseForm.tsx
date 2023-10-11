@@ -7,26 +7,54 @@ import { useForm } from "react-hook-form";
 import { useCreateRentalHouse } from "../hooks/useCreateRentalHouse";
 import { Routing } from "@/Routing/routing";
 import { useRouter } from "next/router";
-import { ADDRESS, ADDRESS_LABEL, BUILDING_AGE, BUILDING_AGE_LABEL, MANSION, MANSION_LABEL, MAX_FLOOR_NUMBER, MAX_FLOOR_NUMBER_LABEL, NEAREST_STATION, NEAREST_STATION_LABEL, RENTAL_HOUSE_PHOTOS, RENTAL_HOUSE_PHOTOS_LABEL, STRUCTURE_TYPE, STRUCTURE_TYPE_LABEL } from "@/constants/const";
+import {
+  ADDRESS,
+  ADDRESS_LABEL,
+  BUILDING_AGE,
+  BUILDING_AGE_LABEL,
+  MANSION,
+  MANSION_LABEL,
+  MAX_FLOOR_NUMBER,
+  MAX_FLOOR_NUMBER_LABEL,
+  NEAREST_STATION,
+  NEAREST_STATION_LABEL,
+  RENTAL_HOUSE_PHOTOS,
+  RENTAL_HOUSE_PHOTOS_LABEL,
+  STRUCTURE_TYPE,
+  STRUCTURE_TYPE_LABEL,
+} from "@/constants/const";
 import { RentalHouseSchema, RentalSchemaType } from "../../../type";
 
 export const CreateRentalHouseForm = () => {
   const router = useRouter();
 
   // react-hook-form
-  const { handleSubmit, register, formState: { errors }, watch } = useForm<RentalSchemaType>({
-    resolver: zodResolver(RentalHouseSchema)
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+    watch,
+  } = useForm<RentalSchemaType>({
+    resolver: zodResolver(RentalHouseSchema),
   });
 
   const { handleCreate } = useCreateRentalHouse();
 
-  const onSubmit = async(data: RentalSchemaType): Promise<void> => {
+  const onSubmit = async (data: RentalSchemaType): Promise<void> => {
     const rentalHouse = await handleCreate(data);
-    if (rentalHouse?.id) router.push(Routing.adminRoomsBelongToHouse.buildRoute({ houseId: rentalHouse.id }).path)
-  } 
+    if (rentalHouse?.id)
+      router.push(
+        Routing.adminRoomsBelongToHouse.buildRoute({ houseId: rentalHouse.id })
+          .path
+      );
+  };
 
   return (
-    <form action="" className="w-full sm:w-4/5 space-y-4" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      action=""
+      className="w-full sm:w-4/5 space-y-4"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <PlainInput
         label={MANSION_LABEL}
         register={register}
@@ -88,11 +116,8 @@ export const CreateRentalHouseForm = () => {
         watch={watch}
       />
       <div className="flex justify-center pb-8">
-        <PlainButton
-          innerText="登録する"
-          type="submit"
-        />
+        <PlainButton innerText="登録する" type="submit" />
       </div>
     </form>
-  )
+  );
 };

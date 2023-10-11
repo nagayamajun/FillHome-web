@@ -2,13 +2,17 @@ import { RentalHouseModel } from "@/feature/rentalHouse/models/rentalHouse.model
 import { AdminRentalHouseCard } from "../AdminRentalHouseCard";
 
 type Props = {
-  myRentalHouses: RentalHouseModel[]
-}
+  myRentalHouses: RentalHouseModel[];
+};
 
-export const BelongToOwnerRentalHouseList = ({ myRentalHouses }: Props): JSX.Element => (
+export const BelongToOwnerRentalHouseList = ({
+  myRentalHouses,
+}: Props): JSX.Element => (
   <div className="grid gap-y-8 md:grid-cols-2 xl:grid-cols-3 ">
-    { myRentalHouses.length === 0 ? (
-      <p className="text-center font-bold text-red-400">まだ作成していません。</p>
+    {myRentalHouses.length === 0 ? (
+      <p className="text-center font-bold text-red-400">
+        まだ作成していません。
+      </p>
     ) : (
       myRentalHouses.map((house) => {
         return (
@@ -19,8 +23,8 @@ export const BelongToOwnerRentalHouseList = ({ myRentalHouses }: Props): JSX.Ele
             img={house.rental_house_photos[0]}
             address={house.address}
           />
-        )
+        );
       })
     )}
   </div>
-)
+);

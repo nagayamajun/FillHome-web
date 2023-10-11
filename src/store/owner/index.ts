@@ -6,5 +6,5 @@ export type OwnerStateType = Owner | null;
 
 export const OwnerState = atom<OwnerStateType>({
   key: "OwnerState",
-  default: null
+  default: null,
 });

@@ -5,7 +5,6 @@ import { CiViewList } from "react-icons/ci";
 import { IoIosCreate } from "react-icons/io";
 
 export const AdminSidebar = () => {
-
   //SideBarに必要なリンクの配列
   const menuLinks = [
     {
@@ -19,7 +18,7 @@ export const AdminSidebar = () => {
       icon: <IoIosCreate />,
     },
   ];
-  
+
   return (
     <div className="flex flex-col w-52 pr-2 min-h-screen h-auto bg-gray-800 text-white">
       <div className="flex justify-center items-center h-20 border-b border-white mx-2">
@@ -38,5 +37,5 @@ export const AdminSidebar = () => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};

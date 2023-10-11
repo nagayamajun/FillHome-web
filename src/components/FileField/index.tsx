@@ -1,5 +1,10 @@
 import { ErrorText } from "@/components/ErrorText";
-import { Control, FieldValues, UseFormRegister, UseFormWatch } from "react-hook-form";
+import {
+  Control,
+  FieldValues,
+  UseFormRegister,
+  UseFormWatch,
+} from "react-hook-form";
 
 type Props = {
   labelText: string;
@@ -7,10 +12,16 @@ type Props = {
   error: string;
   registerValue: string;
   register: UseFormRegister<any>;
-  watch: UseFormWatch<any>
-}
+  watch: UseFormWatch<any>;
+};
 
-export const FileField = ({ labelText, error, registerValue, register, watch }: Props) => {
+export const FileField = ({
+  labelText,
+  error,
+  registerValue,
+  register,
+  watch,
+}: Props) => {
   //リアルタイムで値の変更を監視
   const watchValues = watch(registerValue);
   const values = Array.from(watchValues ?? []);
@@ -34,23 +45,26 @@ export const FileField = ({ labelText, error, registerValue, register, watch }: 
             </p>
           </div>
         </div>
-        { error && (
-          <ErrorText errorText={error} />
-        )}
+        {error && <ErrorText errorText={error} />}
       </div>
 
       <div className="flex flex-col gap-1 mb-4 w-full">
         <label htmlFor="sx">選択した写真</label>
         <ul className="break-all flex-row flex flex-wrap justify-center space-x-4 ">
-          {values.length >= 1 && values.map((preview, index) => {
-            return (
-              <li key={index}>
-                <img src={URL.createObjectURL(preview as Blob)} alt={`プレビュー${index}`} className="w-56 h-56 object-cover" />
-              </li>
-            )
-        })}
+          {values.length >= 1 &&
+            values.map((preview, index) => {
+              return (
+                <li key={index}>
+                  <img
+                    src={URL.createObjectURL(preview as Blob)}
+                    alt={`プレビュー${index}`}
+                    className="w-56 h-56 object-cover"
+                  />
+                </li>
+              );
+            })}
         </ul>
-      </div>     
+      </div>
     </>
-  )
-}
+  );
+};

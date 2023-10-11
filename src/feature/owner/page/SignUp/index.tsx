@@ -11,4 +11,4 @@ export const OwnerSignUp = (): JSX.Element => (
       toggleText="ログイン"
     />
   </div>
-)
+);

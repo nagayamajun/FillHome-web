@@ -9,9 +9,8 @@ const firebaseConfig = {
   projectId: "fill-home-fe",
   storageBucket: "fill-home-fe.appspot.com",
   messagingSenderId: "937189625391",
-  appId: "1:937189625391:web:f42c913ae7536fe89bc0da"
+  appId: "1:937189625391:web:f42c913ae7536fe89bc0da",
 };
-
 
 export const app = initializeApp(firebaseConfig);
 

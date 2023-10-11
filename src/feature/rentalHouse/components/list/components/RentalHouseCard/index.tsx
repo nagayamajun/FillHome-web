@@ -1,5 +1,5 @@
 import { OneRoomCard } from "@/feature/rentalHouse/components/list/components/OneRoomCard";
-import { MansionRoom } from "@/feature/room/type/room";
+import { MansionRoomModel } from "@/feature/room/models/room.model";
 import Image from "next/image";
 import { useMemo } from "react";
 
@@ -8,19 +8,25 @@ type Props = {
   houseName: string;
   img: string;
   address: string;
-  rooms?: MansionRoom[];
-}
+  rooms?: MansionRoomModel[];
+};
 
-export const RentalHouseCard = ({ id, houseName, img, address, rooms }: Props): JSX.Element => {
-
+export const RentalHouseCard = ({
+  id,
+  houseName,
+  img,
+  address,
+  rooms,
+}: Props): JSX.Element => {
   //1番安い家賃を取得する。
-  const minRent = useMemo(() => rooms && Math.min(...rooms.map(room => room.rent)), [rooms]);
+  const minRent = useMemo(
+    () => rooms && Math.min(...rooms.map((room) => room.rent)),
+    [rooms]
+  );
 
   return (
-    <section className="flex flex-col self-start w-full sm:p-4 xl:p-8 items-center space-y-4 rounded-lg">      
-      <figure 
-        style={{ position: 'relative', width: '100%', height: '320px' }}
-      >
+    <section className="flex flex-col self-start w-full sm:p-4 xl:p-8 items-center space-y-4 rounded-lg">
+      <figure style={{ position: "relative", width: "100%", height: "320px" }}>
         <Image
           className="rounded-lg"
           src={img}
@@ -32,17 +38,15 @@ export const RentalHouseCard = ({ id, houseName, img, address, rooms }: Props): 
       <div className="flex flex-col w-[320px] items-start text-left text-sm">
         <p className="text-base font-semibold">{houseName}</p>
         <p className="text-gray-500 mb-1">{address}</p>
-        <p>¥{minRent}~</p> 
+        <p>¥{minRent}~</p>
       </div>
 
       {/* 募集ルームを一覧表示 */}
       <div className="flex flex-col w-[320px] items-center space-y-2">
-        {
-          rooms?.map((room) => (
-            <OneRoomCard key={room.id} room={room} rental_houseId={id} />
-          ))
-        }
+        {rooms?.map((room) => (
+          <OneRoomCard key={room.id} room={room} rental_house_id={id} />
+        ))}
       </div>
     </section>
   );
-}
+};

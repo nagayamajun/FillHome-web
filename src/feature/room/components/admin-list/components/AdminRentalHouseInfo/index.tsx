@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { Structure } from "../../type/rentalHouse";
+import { Structure, StructureType } from "../../../../../rentalHouse/type/rentalHouse";
+import { Layout } from "@/feature/room/type/room";
 
 type Props = {
   id: string,
@@ -9,11 +10,11 @@ type Props = {
   max_floor_number: number,
   building_age: number,
   rental_house_photos: string, 
-  structure_type_id: number,
+  structure_type: StructureType,
 }
 
 export const AdminRentalHouseInfo = ({
-  id, name, address, nearest_station, structure_type_id, max_floor_number,building_age, rental_house_photos
+  id, name, address, nearest_station, structure_type, max_floor_number,building_age, rental_house_photos
 }: Props) => (
   <>
     <div className="w-sm md:w-md lg:w-lg h-[320px] lg:h-[400px] relative">
@@ -39,7 +40,7 @@ export const AdminRentalHouseInfo = ({
         <div className="flex justify-between">
           <div className="w-1/3">
             <p className="text-xs">構造</p>
-            <p>{Structure[structure_type_id]}</p>
+            <p>{structure_type}</p>
           </div>
           <div className="w-1/3">
             <p className="text-xs">階数</p>

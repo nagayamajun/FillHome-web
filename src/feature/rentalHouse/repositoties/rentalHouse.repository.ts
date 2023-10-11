@@ -1,5 +1,4 @@
 import { axiosInstance } from "@/lib/axios";
-import { FAIL_TO_GET_ROOMS_WITH_RENTALHOUSE } from "@/constants/messages";
 import { Structure } from "../type/rentalHouse";
 import { CreateRentalHouse } from "../components/admin-create/type";
 import { Photo } from "@/type/photo";
@@ -71,34 +70,4 @@ export const rentalHouseRepository: RentalHouseRepository = {
   create,
   getAllOwn,
   getAll
-}
-
-
-
-
-
-
-
-
-
-
-
-
-// TODO
-// repository層に移行する
-export const rentalHoseRepository = {
-    //物件と紐ずくroom一覧取得
-  async getRoomsWithSpecificRentalHouse(houseId?: number | string) {
-    try {
-      const res = await axiosInstance.get(`/rental-house/owner/${houseId}/rental-house-to-rooms`);
-      return res.data; 
-    } catch (error: unknown) {
-      const isTypeSafeError = error instanceof Error;
-
-      throw new Error(`${FAIL_TO_GET_ROOMS_WITH_RENTALHOUSE}\n${
-        isTypeSafeError ? error.message : ""
-      }`)
-    }
-  },
-}
-
+};

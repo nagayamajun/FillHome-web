@@ -2,15 +2,15 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction';
 import { useRouter } from "next/router";
-import { useMansionRoom } from "../hooks/useMansionRoom";
+import { useMansionRoom } from "../../room/hooks/useMansionRoom";
 import { useMemo, useState } from "react";
-import { ReservedCalendar } from "../components/ReservedCalendar";
+import { ReservedCalendar } from "../ReservedCalendar";
 import { useForm } from "react-hook-form";
 import { PlainButton } from "@/components/Button";
 import { PlainInput } from "@/components/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CreateReservedRoomSchema, CreateRoomSchema } from "../type/schema";
-import { roomRepository } from "../repositories/rooms.repository";
+import { CreateReservedRoomSchema } from "../../room/type/schema";
+import { roomRepository } from "../rooms.repository";
 import { useLoading } from "@/hooks/useLoading";
 import { useToast } from "@/hooks/useToast";
 

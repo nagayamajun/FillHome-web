@@ -1,5 +1,5 @@
 import { axiosInstance } from "@/lib/axios";
-import { CreateRoom, MansionRoomWithRentalHouse } from "../type/room";
+import { CreateRoom, MansionRoomWithRentalHouse, MansionRoomsWithRentalHouse } from "../type/room";
 import { MansionRoomModel } from "../models/room.model";
 import { Photo } from "@/type/photo";
 import { RentalHouseModel } from "@/feature/rentalHouse/models/rentalHouse.model";
@@ -11,7 +11,8 @@ export type RoomRepository = {
   ) => Promise<MansionRoomWithRentalHouse>,
   create: (
     { input, mansion_id }: { input: CreateRoom, mansion_id: string}
-  ) => Promise<Pick<MansionRoomModel, 'id'>>
+  ) => Promise<Pick<MansionRoomModel, 'id'>>,
+  getAllWithRentalHouse: (houseId: string) => Promise<MansionRoomsWithRentalHouse>
 };
 
 const getOneWithRentalHouse: RoomRepository['getOneWithRentalHouse'] = async(
@@ -51,7 +52,43 @@ const getOneWithRentalHouse: RoomRepository['getOneWithRentalHouse'] = async(
   }
 }
 
-export const create: RoomRepository['create'] = async(
+const getAllWithRentalHouse: RoomRepository['getAllWithRentalHouse'] =async (house_id: string) => {
+  const response = (await axiosInstance.get(`/rental-house/owner/${house_id}/rental-house-to-rooms`)).data;
+  
+  const resRentalHouse: RentalHouseModel = {
+    id: response.id,
+    name: response.name,
+    address: response.address,
+    nearest_station: response.nearest_station,
+    max_floor_number: response.max_floor_number,
+    building_age: response.building_age,
+    rental_house_photos: response.rental_house_photos.map((photo: Photo) => photo.image),
+    structure_type: Structure[response.structure_type],
+  }
+
+  const resRooms: MansionRoomModel[] = response.mansion.mansion_rooms.map((room: any) => {
+    return {
+      id: room.id,
+      layout: room.layout,
+      thanks_money: room.thanks_money, 
+      security_deposit: room.security_deposit,
+      floor_number: room.floor_number,
+      stay_fee: room.stay_fee,
+      rent: room.rent,      
+      maintenance_fee: room.maintenance_fee,
+      contract_duration: room.contract_duration,
+      mansion_room_photos: room.mansion_room_photos.map((photo: Photo) => photo.image),
+      available_dates: room.available_dates,
+    }
+  });
+
+  return {
+    mansion_rooms: resRooms,
+    rental_house: resRentalHouse
+  }
+}
+
+const create: RoomRepository['create'] = async(
   { input, mansion_id }: { input: CreateRoom, mansion_id: string}
 ) => {
   const response = await axiosInstance.post(`/mansion-room/create/${mansion_id}`, input);
@@ -60,5 +97,6 @@ export const create: RoomRepository['create'] = async(
 
 export const roomRepository: RoomRepository = {
   getOneWithRentalHouse,
-  create
+  create,
+  getAllWithRentalHouse
 }

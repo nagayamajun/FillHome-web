@@ -30,6 +30,11 @@ export const roomFactory = (req?: RoomRepository) => {
       return response
     },
 
+    getAllWithRentalHouse:async (house_id: string) => {
+      const response = await repository.getAllWithRentalHouse(house_id);
+      return response
+    },
+
     create: async ({input, mansion_id }: { input: CreateRoom, mansion_id: string}) => {
       const response = await repository.create({input, mansion_id});
       return response

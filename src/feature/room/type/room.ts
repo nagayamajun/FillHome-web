@@ -29,7 +29,7 @@ export const layoutArray: Layout[] = ['1R', '1K', '1DK', '1LDK', '2K', '2DK', '2
 export type Mansion = {
   id: string, //mansion_roomをcreateする時はこの値が必要
   rental_house_id: string,
-  mansion_rooms?: MansionRoom[]
+  mansion_rooms?: MansionRoomModel[]
 }
 
 //mansion_roomを作成する時の型
@@ -39,8 +39,8 @@ export type CreateRoom = Omit<MansionRoomModel, 'id'>
 export type MansionRoom = BaseRoom;
 
 export type MansionRoomsWithRentalHouse = {
-  mansionRoom: MansionRoom[]; 
-  rentalHouse: RentalHouse; 
+  mansion_rooms: MansionRoomModel[]; 
+  rental_house: RentalHouseModel; 
 };
 export type MansionRoomWithRentalHouse = {
   mansion_room: MansionRoomModel; 

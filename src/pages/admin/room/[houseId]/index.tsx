@@ -1,5 +1,5 @@
 import { AdminLayout } from "@/components/layouts/Layout/AdminLayout";
-import { RoomListBelongToOwnerHose } from "@/feature/room/page/AdminRoomListWithRentalHouse";
+import { RoomListBelongToOwnerHose } from "@/feature/room/components/admin-list/page";
 import { ReactElement } from "react";
 
 //rentalHouse一件に紐ずくroom一覧取得

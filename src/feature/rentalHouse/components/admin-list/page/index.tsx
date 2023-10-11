@@ -1,6 +1,6 @@
 import { useOwnRentalHouses } from "@/feature/rentalHouse/components/admin-list/hooks/useOwnRentalHouses";
 import { BelongToOwnerRentalHouseList } from "../components/AdminBelongToOwnerRentalHouseList"
-import { PlainTitle } from "@/components/TItile/PlainTitle";
+import { PlainTitle } from "@/components/Title/PlainTitle";
 
 export const AdminRentalHouseList = () => {
   const { myRentalHouses } = useOwnRentalHouses(); 

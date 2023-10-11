@@ -22,6 +22,8 @@ export type BaseRoom = {
 export type Layout = 
   '1R' | '1K' |'1DK' | '1LDK' | '2K' | '2DK' | '2LDK' | '3DK' 
   | '3LDK' | '4DK' | '4LDK' | 'その他';
+
+export const layoutArray: Layout[] = ['1R', '1K', '1DK', '1LDK', '2K', '2DK', '2LDK', '3DK', '3LDK', '4DK', '4LDK', 'その他'];
   
 //マンションの中間テーブル
 export type Mansion = {
@@ -31,7 +33,7 @@ export type Mansion = {
 }
 
 //mansion_roomを作成する時の型
-export type CreateRoom = Omit<MansionRoom, 'id'> & { mansion_id: string}
+export type CreateRoom = Omit<MansionRoomModel, 'id'>
 
 //マンションの型
 export type MansionRoom = BaseRoom;

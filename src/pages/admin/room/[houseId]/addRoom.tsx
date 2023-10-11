@@ -1,5 +1,5 @@
 import { AdminLayout } from "@/components/layouts/Layout/AdminLayout";
-import { AdminAddRentalRoom } from "@/feature/room/page/AdminAddRoomBelongToRentalHouse";
+import { AdminAddRentalRoom } from "@/feature/room/components/admin-create/page";
 import { ReactElement } from "react";
 
 //rentalHouse一件に紐ずくroom一覧取得

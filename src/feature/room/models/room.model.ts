@@ -1,5 +1,5 @@
 import { RoomRepository, roomRepository } from "../repositories/room.repository";
-import { Layout } from "../type/room";
+import { CreateRoom, Layout } from "../type/room";
 
 // model
 //Roomタイプの共通カラム
@@ -27,6 +27,11 @@ export const roomFactory = (req?: RoomRepository) => {
   return {
     getOneWithHouse: async ({id, rental_house_id}: {id: string, rental_house_id: string}) => {
       const response = await repository.getOneWithRentalHouse({id, rental_house_id});
+      return response
+    },
+
+    create: async ({input, mansion_id }: { input: CreateRoom, mansion_id: string}) => {
+      const response = await repository.create({input, mansion_id});
       return response
     }
   }

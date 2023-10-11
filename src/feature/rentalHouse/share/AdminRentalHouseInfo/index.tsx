@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Structure } from "../../type/rentalHouse";
 
 type Props = {
-  id: number,
+  id: string,
   name: string,
   address: string,
   nearest_station: string,

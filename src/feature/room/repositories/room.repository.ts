@@ -1,19 +1,23 @@
 import { axiosInstance } from "@/lib/axios";
-import { MansionRoomWithRentalHouse } from "../type/room";
+import { CreateRoom, MansionRoomWithRentalHouse } from "../type/room";
 import { MansionRoomModel } from "../models/room.model";
 import { Photo } from "@/type/photo";
 import { RentalHouseModel } from "@/feature/rentalHouse/models/rentalHouse.model";
 import { Structure } from "@/feature/rentalHouse/type/rentalHouse";
 
 export type RoomRepository = {
-  getOneWithRentalHouse: ({ id, rental_house_id }: { id: string, rental_house_id: string }) => Promise<MansionRoomWithRentalHouse>
+  getOneWithRentalHouse: (
+    { id, rental_house_id }: { id: string, rental_house_id: string }
+  ) => Promise<MansionRoomWithRentalHouse>,
+  create: (
+    { input, mansion_id }: { input: CreateRoom, mansion_id: string}
+  ) => Promise<Pick<MansionRoomModel, 'id'>>
 };
 
 const getOneWithRentalHouse: RoomRepository['getOneWithRentalHouse'] = async(
   { id, rental_house_id }: { id: string, rental_house_id: string }
 ) => {
   const { mansion_room, rental_house } = (await axiosInstance.get(`/mansion-room/rental-house/${rental_house_id}/room/${id}`)).data;
-  console.log("確認", mansion_room, rental_house)
   const resRoom: MansionRoomModel = {
     id: mansion_room.id,
     layout: mansion_room.layout,
@@ -40,13 +44,21 @@ const getOneWithRentalHouse: RoomRepository['getOneWithRentalHouse'] = async(
     rental_house_photos: rental_house.rental_house_photos.map((photo: Photo) => photo.image),
     structure_type: Structure[rental_house.structure_type],
   }
-  console.log("確認型変換後", resRoom, resRentalHouse)
+
   return {
     mansion_room: resRoom,
     rental_house: resRentalHouse
   }
 }
 
+export const create: RoomRepository['create'] = async(
+  { input, mansion_id }: { input: CreateRoom, mansion_id: string}
+) => {
+  const response = await axiosInstance.post(`/mansion-room/create/${mansion_id}`, input);
+  return response.data.id
+}
+
 export const roomRepository: RoomRepository = {
-  getOneWithRentalHouse
+  getOneWithRentalHouse,
+  create
 }

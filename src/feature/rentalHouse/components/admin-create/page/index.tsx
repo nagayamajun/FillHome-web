@@ -1,4 +1,4 @@
-import { PlainTitle } from "@/components/TItile/PlainTitle";
+import { PlainTitle } from "@/components/Title/PlainTitle";
 import { CreateRentalHouseForm } from "../components/CreateRentalhouseForm";
 
 export const AddRentalHouse = (): JSX.Element => (

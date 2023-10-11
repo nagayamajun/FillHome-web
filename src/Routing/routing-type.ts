@@ -32,7 +32,7 @@ export type RoutingType = {
   addRentalHouse: RoutingWithNoParams;
   //room
   adminRoomsBelongToHouse: RoutingWithParams<{ houseId: string }>;
-  adminAddRoomBelongToHouse: RoutingWithParams<{ houseId: number }>;
+  adminAddRoomBelongToHouse: RoutingWithParams<{ houseId: string }>;
 
   //reserved
   reservedRoom: RoutingWithParams<{ mansion_room_id: string }>;

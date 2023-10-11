@@ -1,5 +1,5 @@
 import { OneRoomCard } from "@/feature/rentalHouse/components/list/components/OneRoomCard";
-import { MansionRoom } from "@/feature/room/type/room";
+import { MansionRoomModel } from "@/feature/room/models/room.model";
 import Image from "next/image";
 import { useMemo } from "react";
 
@@ -8,7 +8,7 @@ type Props = {
   houseName: string;
   img: string;
   address: string;
-  rooms?: MansionRoom[];
+  rooms?: MansionRoomModel[];
 }
 
 export const RentalHouseCard = ({ id, houseName, img, address, rooms }: Props): JSX.Element => {

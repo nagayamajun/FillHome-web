@@ -1,13 +1,13 @@
 import Image from "next/image";
-import { MansionRoom } from "../../../../../room/type/room"
 import { ErrorText } from "@/components/ErrorText";
 import Link from "next/link";
 import { Loading } from "@/components/Loading";
 import { STAY_FEE_LABEL } from "@/constants/const";
 import { Routing } from "@/Routing/routing";
+import { MansionRoomModel } from "@/feature/room/models/room.model";
 
 type Props = {
-  room: MansionRoom;
+  room: MansionRoomModel;
   rental_house_id: string
 }
 
@@ -22,7 +22,7 @@ export const OneRoomCard = (
       <div className=" w-[80px] h-[80px] relative">
         <Image 
           className="rounded-lg"
-          src={mansion_room_photos[0].image} 
+          src={mansion_room_photos[0]} 
           objectFit="cover"
           layout="fill"
           alt="各部屋の写真"

@@ -1,23 +1,5 @@
-import { RentalHouse } from "@/feature/rentalHouse/type/rentalHouse";
-import { Photo } from "@/type/photo";
 import { MansionRoomModel } from "../models/room.model";
 import { RentalHouseModel } from "@/feature/rentalHouse/models/rentalHouse.model";
-
-//Roomタイプの共通カラム
-export type BaseRoom = {
-  id: string;
-  layout: Layout;
-  thanks_money: number;  // 礼金
-  security_deposit: number; // 敷金
-  floor_number: number; // 階層
-  stay_fee: number;
-  rent: number; // 賃金
-  maintenance_fee: number;
-  contract_duration: string; // 契約期間
-  mansion_room_photos: Photo[];
-  available_dates?: string[];
-  reserve_url: string;
-}
 
 export type Layout = 
   '1R' | '1K' |'1DK' | '1LDK' | '2K' | '2DK' | '2LDK' | '3DK' 
@@ -35,8 +17,6 @@ export type Mansion = {
 //mansion_roomを作成する時の型
 export type CreateRoom = Omit<MansionRoomModel, 'id'>
 
-//マンションの型
-export type MansionRoom = BaseRoom;
 
 export type MansionRoomsWithRentalHouse = {
   mansion_rooms: MansionRoomModel[]; 

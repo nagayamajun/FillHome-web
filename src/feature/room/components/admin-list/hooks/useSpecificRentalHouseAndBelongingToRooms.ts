@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useLoading } from "@/hooks/useLoading";
-import { RentalHouse } from "@/feature/rentalHouse/type/rentalHouse";
 import { MansionRoomModel, roomFactory } from "@/feature/room/models/room.model";
 import { useNotice } from "@/hooks/useNotice";
 import { FAIL_TO_GET_ROOMS_WITH_RENTALHOUSE } from "@/constants/messages";

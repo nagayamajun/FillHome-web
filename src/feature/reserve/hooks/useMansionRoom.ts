@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { MansionRoom } from "../type/room";
-import { roomRepository } from "../../reserve/rooms.repository";
+import { roomRepository } from "../rooms.repository";
 import { useLoading } from "@/hooks/useLoading";
 
 export const useMansionRoom = (room_id: string | undefined) => {
   const { showLoading, hideLoading } = useLoading();
-  const [ mansionRoom, setMansionRoom ] = useState<MansionRoom>();
+  const [ mansionRoom, setMansionRoom ] = useState<any>();
 
   useEffect(() => {
     if (!room_id) return 

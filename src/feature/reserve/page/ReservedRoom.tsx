@@ -2,7 +2,7 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from '@fullcalendar/daygrid'
 import interactionPlugin from '@fullcalendar/interaction';
 import { useRouter } from "next/router";
-import { useMansionRoom } from "../../room/hooks/useMansionRoom";
+import { useMansionRoom } from "../hooks/useMansionRoom";
 import { useMemo, useState } from "react";
 import { ReservedCalendar } from "../ReservedCalendar";
 import { useForm } from "react-hook-form";
@@ -26,7 +26,7 @@ export const ReservedMansionRoom = (): JSX.Element => {
   
   //available_dateからeventを作成
   const events = useMemo(() => {
-    return mansionRoom?.available_dates?.map((dateString) => {
+    return mansionRoom?.available_dates?.map((dateString: any) => {
       return {
         title: '予約可能日',
         start: dateString,

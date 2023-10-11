@@ -100,7 +100,7 @@ export const CreateRoomForm = ({ houseId }: Props) => {
           -- 選択してください --
         </option>
         {layoutArray.map((layout) => (
-          <option value={layout}>{layout}</option>
+          <option key={layout} value={layout}>{layout}</option>
         ))}
       </PlainSelectInput>
 

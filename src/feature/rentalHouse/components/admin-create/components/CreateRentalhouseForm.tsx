@@ -4,9 +4,6 @@ import { PlainSelectInput } from "@/components/SelectInput";
 import { FileField } from "@/components/FileField";
 import { PlainButton } from "@/components/Button";
 import { useForm } from "react-hook-form";
-import { useCreateRentalHouse } from "../hooks/useCreateRentalHouse";
-import { Routing } from "@/Routing/routing";
-import { useRouter } from "next/router";
 import {
   ADDRESS,
   ADDRESS_LABEL,
@@ -25,9 +22,11 @@ import {
 } from "@/constants/const";
 import { RentalHouseSchema, RentalSchemaType } from "../../../type";
 
-export const CreateRentalHouseForm = () => {
-  const router = useRouter();
+type Props = {
+  onSubmit: (data: RentalSchemaType) => Promise<void>;
+}
 
+export const CreateRentalHouseForm = ({ onSubmit }: Props) => {
   // react-hook-form
   const {
     handleSubmit,
@@ -37,17 +36,6 @@ export const CreateRentalHouseForm = () => {
   } = useForm<RentalSchemaType>({
     resolver: zodResolver(RentalHouseSchema),
   });
-
-  const { handleCreate } = useCreateRentalHouse();
-
-  const onSubmit = async (data: RentalSchemaType): Promise<void> => {
-    const rentalHouse = await handleCreate(data);
-    if (rentalHouse?.id)
-      router.push(
-        Routing.adminRoomsBelongToHouse.buildRoute({ houseId: rentalHouse.id })
-          .path
-      );
-  };
 
   return (
     <form

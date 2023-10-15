@@ -1,10 +1,7 @@
 import { Mansion } from "@/feature/room/type/room";
-import {
-  RentalHouseRepository,
-  rentalHouseRepository,
-} from "../repositoties/rentalHouse.repository";
 import { StructureType } from "../type/rentalHouse";
 import { CreateRentalHouse } from "../components/admin-create/type";
+import { RentalHouseRequest, rentalHouseRequest } from "../request/rentalHouse.request";
 
 // model
 export type RentalHouseModel = {
@@ -16,24 +13,24 @@ export type RentalHouseModel = {
   building_age: number;
   rental_house_photos: string[];
   structure_type: StructureType;
-  mansion?: Mansion; //　TODO: mansionもModelに作成する
+  mansion?: Mansion;
 };
 
 // factory
-export const rentalHouseFactory = (req?: RentalHouseRepository) => {
-  const repository = req ?? rentalHouseRepository;
+export const rentalHouseFactory = (req?: RentalHouseRequest) => {
+  const request = req ?? rentalHouseRequest;
 
   return {
     create: async (input: CreateRentalHouse) => {
-      const response = await repository.create(input);
+      const response = await request.create(input);
       return response;
     },
     getAllOwn: async () => {
-      const response = await repository.getAllOwn();
+      const response = await request.getAllOwn();
       return response;
     },
     getAll: async () => {
-      const response = await repository.getAll();
+      const response = await request.getAll();
       return response;
     },
   };

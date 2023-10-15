@@ -4,13 +4,13 @@ import { CreateRentalHouse } from "../components/admin-create/type";
 import { Photo } from "@/type/photo";
 import { RentalHouseModel } from "../models/rentalHouse.model";
 
-export type RentalHouseRepository = {
+export type RentalHouseRequest = {
   create: (input: CreateRentalHouse) => Promise<RentalHouseModel>;
   getAllOwn: () => Promise<RentalHouseModel[]>;
   getAll: () => Promise<RentalHouseModel[]>;
 };
 
-const create: RentalHouseRepository["create"] = async (
+const create: RentalHouseRequest["create"] = async (
   input: CreateRentalHouse
 ): Promise<RentalHouseModel> => {
   const response = (
@@ -35,7 +35,7 @@ const create: RentalHouseRepository["create"] = async (
   return result;
 };
 
-const getAllOwn: RentalHouseRepository["getAllOwn"] = async () => {
+const getAllOwn: RentalHouseRequest["getAllOwn"] = async () => {
   const response = (await axiosInstance.get(`/rental-house/owner`)).data;
   const results: RentalHouseModel[] = response.map((response: any) => {
     return {
@@ -54,7 +54,7 @@ const getAllOwn: RentalHouseRepository["getAllOwn"] = async () => {
   return results;
 };
 
-const getAll: RentalHouseRepository["getAll"] = async () => {
+const getAll: RentalHouseRequest["getAll"] = async () => {
   const response = (await axiosInstance.get("/rental-house")).data;
   const results: RentalHouseModel[] = response.map((response: any) => {
     return {
@@ -74,7 +74,7 @@ const getAll: RentalHouseRepository["getAll"] = async () => {
   return results;
 };
 
-export const rentalHouseRepository: RentalHouseRepository = {
+export const rentalHouseRequest: RentalHouseRequest = {
   create,
   getAllOwn,
   getAll,

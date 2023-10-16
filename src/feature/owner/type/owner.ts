@@ -8,3 +8,10 @@ export type Owner = {
 };
 
 export type CreateOwner = Owner;
+
+export type SignInType = {
+  email: string,
+  password: string
+}
+
+export type SignUpType = Omit<Owner, "id" | "firebase_uid"> & { password: string }

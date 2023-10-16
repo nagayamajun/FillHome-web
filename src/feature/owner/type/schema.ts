@@ -14,11 +14,11 @@ export const signUpInputSchema = z.object({
   phone_number: z.string().min(1, REQUIRE_FIELD),
   // phone_number: z.string().regex(/^\d{11}$/, '「-」無しで携帯番号をお願いします。')
 });
-export type SignUpInput = z.infer<typeof signUpInputSchema>;
+export type SignUpInputType = z.infer<typeof signUpInputSchema>;
 
 //SignInのschema
 export const signInInputSchema = z.object({
   email: z.string().email(INVALID_EMAIL_FORMAT_MESSAGE),
   password: z.string().min(8, "8文字以上で入力してください"),
 });
-export type SignInInput = z.infer<typeof signUpInputSchema>;
+export type SignInInputType = z.infer<typeof signInInputSchema>;

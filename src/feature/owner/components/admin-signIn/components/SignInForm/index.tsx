@@ -2,43 +2,20 @@ import { PlainButton } from "@/components/Button";
 import { PlainInput } from "@/components/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { signInInputSchema } from "../../type/schema";
-import { useToast } from "@/hooks/useToast";
-import { useCertainOwner } from "@/hooks/useCertainOwner";
-import { authRepository } from "../../modules/auth.repository";
-import { ToastResult } from "@/type/toast";
-import { Routing } from "@/Routing/routing";
+import { SignInInputType, signInInputSchema } from "../../../../type/schema";
 import { useRouter } from "next/router";
 
-export const SignInForm = (): JSX.Element => {
+type Props = {
+  onSubmit: (data: SignInInputType) => Promise<any>
+}
+
+export const SignInForm = ({ onSubmit }: Props): JSX.Element => {
   const router = useRouter();
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm({
+
+  // react-hook-form
+  const { handleSubmit, register, formState: { errors } } = useForm<SignInInputType>({
     resolver: zodResolver(signInInputSchema),
   });
-
-  const { showToast, hideToast } = useToast();
-  const { setOwner } = useCertainOwner();
-
-  const onSubmit = (createData: any): void => {
-    authRepository
-      .signIn(createData)
-      .then(({ data, style, message }: ToastResult) => {
-        showToast({ message, style });
-        setTimeout(() => {
-          hideToast();
-          if (style === "success") {
-            //headerに認証情報を追加する
-
-            setOwner(data);
-            return router.push(Routing.adminRentalHouses.buildRoute().path);
-          }
-        }, 3000);
-      });
-  };
 
   return (
     <form

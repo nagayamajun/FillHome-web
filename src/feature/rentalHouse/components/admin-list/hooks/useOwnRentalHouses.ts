@@ -18,6 +18,7 @@ export const useOwnRentalHouses = () => {
         setMyRentalHouses(fetchedMyRentalHouses);
         hideLoading();
       } catch (error: unknown) {
+        hideLoading();
         const isTypeSafeError = error instanceof Error;
         toast.error(
           `${FAIL_TO_GET_RENTALHOUSE}\n${isTypeSafeError && error.message}`

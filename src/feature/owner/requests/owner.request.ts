@@ -1,4 +1,5 @@
 import { axiosInstance } from "@/lib/axios";
+import { Owner } from "../type/owner";
 
 export const ownerRepository = {
   async getByFirebaseUID() {
@@ -14,3 +15,16 @@ export const ownerRepository = {
     }
   },
 };
+
+export type OwnerRequest = {
+  getByFirebaseUID: () => Promise<Owner>
+}
+
+const getByFirebaseUID: OwnerRequest['getByFirebaseUID'] = async() => {
+  const res = await axiosInstance.get("/owner/firebase-uid");
+  return res.data;
+};
+
+export const ownerRequest: OwnerRequest = {
+  getByFirebaseUID
+}

@@ -5,9 +5,9 @@ import { useRouter } from "next/router";
 import { OwnerState, OwnerStateType } from "@/store/owner";
 import { auth } from "@/lib/firebase";
 import { setAuthToken } from "@/lib/axios";
-import { ownerRepository } from "@/feature/owner/requests/owner.request";
 import { useLoading } from "./useLoading";
 import { Routing } from "../Routing/routing";
+import { ownerFactory } from "@/feature/owner/models/owner.model";
 
 export const useAuth = (): OwnerStateType => {
   const router = useRouter();
@@ -25,7 +25,7 @@ export const useAuth = (): OwnerStateType => {
       const token = await authUser.getIdToken();
       setAuthToken(token);
 
-      const owner = await ownerRepository.getByFirebaseUID();
+      const owner = await ownerFactory().getByFirebaseUID();
       //firebase上でログインしている操作者がDBのuserレコード上では見つからなかった場合も、サインインページにリダイレクト
       if (!owner) {
         router.push(Routing.ownerSignIn.buildRoute().path);

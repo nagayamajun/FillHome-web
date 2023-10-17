@@ -20,22 +20,22 @@ export const AdminSidebar = () => {
   ];
 
   return (
-    <div className="flex flex-col w-52 pr-2 min-h-screen h-auto bg-gray-800 text-white">
-      <div className="flex justify-center items-center h-20 border-b border-white mx-2">
+    <aside className="fixed top-0 left-0 flex flex-col w-60 h-screen bg-gray-800 text-white">
+      <div className="flex justify-center items-center h-24 w-full border-b border-white ">
         <AdminHeading />
       </div>
-      <div className="flex flex-col items-center ">
+      <div className="flex flex-col items-center w-full">
         {menuLinks.map((menu) => (
           <Link
             key={menu.label}
             href={menu.href}
-            className="flex flex-row items-center justify-start font-semibold h-16 ml-2 w-full hover:bg-pink-color"
+            className="flex flex-row items-center justify-start font-semibold h-16 pl-4 w-full hover:bg-pink-color"
           >
             <div className="text-2xl mr-2">{menu.icon}</div>
             <div>{menu.label}</div>
           </Link>
         ))}
       </div>
-    </div>
+    </aside>
   );
 };

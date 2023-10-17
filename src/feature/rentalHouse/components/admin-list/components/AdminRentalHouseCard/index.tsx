@@ -25,7 +25,7 @@ export const AdminRentalHouseCard = ({
         objectFit="cover"
       />
     </figure>
-    <div className="flex flex-col bg-white rounded-md w-full space-y-8">
+    <div className="flex flex-col bg-gray-50 p-4 rounded-md w-full space-y-8">
       <div className="flex flex-col items-start text-left text-sm">
         <p className="text-base font-semibold">{houseName}</p>
         <p className="text-gray-500 mb-1">{address}</p>

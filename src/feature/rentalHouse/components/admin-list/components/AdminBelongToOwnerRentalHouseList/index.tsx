@@ -8,7 +8,7 @@ type Props = {
 export const BelongToOwnerRentalHouseList = ({
   myRentalHouses,
 }: Props): JSX.Element => (
-  <div className="grid gap-y-8 md:grid-cols-2 xl:grid-cols-3 ">
+  <div className="grid gap-y-8 lg:grid-cols-2 xl:grid-cols-3 ">
     {myRentalHouses.length === 0 ? (
       <p className="text-center font-bold text-red-400">
         まだ作成していません。

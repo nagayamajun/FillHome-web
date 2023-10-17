@@ -3,5 +3,5 @@ type Props = {
 };
 
 export const PlainTitle = ({ titleText }: Props): JSX.Element => (
-  <div className="font-semibold text-xl text-left w-full">{titleText}</div>
+  <h1 className="font-semibold text-2xl text-left w-full">{titleText}</h1>
 );

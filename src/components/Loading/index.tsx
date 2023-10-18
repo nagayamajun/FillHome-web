@@ -1,5 +1,5 @@
-import { LoadingState } from "@/store/loading";
 import { useRecoilValue } from "recoil";
+import { LoadingState } from "../../store/loading";
 
 export const Loading = (): JSX.Element => {
   const state = useRecoilValue(LoadingState);

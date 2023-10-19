@@ -1,15 +1,12 @@
 import Image from "next/image";
-import { Inter } from "next/font/google";
 import Link from "next/link";
 import { PlainLink } from "@/components/Link";
 import { Routing } from "@/Routing/routing";
 
-const inter = Inter({ subsets: ["latin"] });
-
 export default function Home() {
   return (
     <main
-      className={`flex min-h-screen w-full flex-col items-center justify-center p-24 ${inter.className}`}
+      className={`flex min-h-screen w-full flex-col items-center justify-center p-24 `}
     >
       <div className="flex flex-col items-center w-80 sm:w-96 space-y-8">
         <Image src="/FiillHome.png" height={240} width={240} alt="ロゴ" />

@@ -4,4 +4,4 @@ import { RentalHouseModel } from "@/feature/rentalHouse/models/rentalHouse.model
 export type CreateRentalHouse = Omit<
   RentalHouseModel,
   "id" | "mansion" | "structure_type"
-> & { structure_type_id: number };
+> & { structure_type: number };

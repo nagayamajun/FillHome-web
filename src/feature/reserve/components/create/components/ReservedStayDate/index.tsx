@@ -2,79 +2,65 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { useRouter } from "next/router";
-import { useMansionRoom } from "../hooks/useMansionRoom";
-import { useMemo, useState } from "react";
-import { ReservedCalendar } from "../ReservedCalendar";
+import { useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { PlainButton } from "@/components/Button";
 import { PlainInput } from "@/components/Input";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CreateReservedRoomSchema } from "../../room/type/schema";
-import { roomRepository } from "../rooms.repository";
-import { useLoading } from "@/hooks/useLoading";
-import { useToast } from "@/hooks/useToast";
+import { CreateReservedRoomSchema, CreateReservedRoomSchemaType } from "../../../../type";
+import { MansionRoomModel } from "@/feature/room/models/room.model";
+import { PlainTitle } from "@/components/Title/PlainTitle";
 
-export const ReservedMansionRoom = (): JSX.Element => {
+type Props = {
+  mansion_room_id: string
+  availableDates: MansionRoomModel['available_dates']
+  handleCreate: ({ mansion_room_id, input }: { mansion_room_id: string, input: CreateReservedRoomSchemaType }) => Promise<boolean>
+}
+
+export const ReservedStayDate = ({ availableDates, handleCreate, mansion_room_id }: Props ): JSX.Element => {
   const router = useRouter();
-  const { mansion_room_id } = router.query;
-  const { mansionRoom } = useMansionRoom(mansion_room_id as string);
+  // react-hook-form
   const {
     handleSubmit,
     register,
     formState: { errors },
     setValue,
-  } = useForm({
+    watch
+  } = useForm<CreateReservedRoomSchemaType>({
     resolver: zodResolver(CreateReservedRoomSchema),
   });
-  const { showLoading, hideLoading } = useLoading();
-  const { showToast, hideToast } = useToast();
+  // 宿泊日の監視
+  const watchValues = watch('stay_date');
 
   //available_dateからeventを作成
   const events = useMemo(() => {
-    return mansionRoom?.available_dates?.map((dateString: any) => {
+    return availableDates?.map((dateString: any) => {
       return {
         title: "予約可能日",
         start: dateString,
       };
     });
-  }, [mansionRoom]);
+  }, [availableDates]);
 
-  const onsubmit = async (data: any) => {
-    showLoading();
-
-    await roomRepository
-      .reserveRoom({
-        input: data,
-        mansion_room_id: mansionRoom?.id!,
-      })
-      .then(({ style, message }) => {
-        showToast({ style, message });
-        setTimeout(() => {
-          hideToast();
-          // router.reload()
-        }, 4000);
-        hideLoading();
-      })
-      .catch((error) => {
-        hideLoading();
-        throw error;
-      });
+  const onSubmit = async (data: CreateReservedRoomSchemaType) => {
+    const isCreated = await handleCreate({input: data, mansion_room_id });
+    // todo: 画面を飛ばすことを検討
+    if (isCreated) router.reload();
   };
 
   return (
-    <div className="flex items-center justify-center">
-      {/* <ReservedCalendar
-        events={events}
-      /> */}
-      <form onSubmit={handleSubmit(onsubmit)} className="my-8 space-y-4">
+    <div className="flex flex-col items-center justify-center m-4">
+      <PlainTitle
+        titleText="宿泊日予約"
+      />
+      <form onSubmit={handleSubmit(onSubmit)} className="my-8 space-y-4">
         <FullCalendar
           plugins={[dayGridPlugin, interactionPlugin]}
           headerToolbar={{
-            start: "prev,next",
-            center: "title",
-            end: "dayGridMonth,dayGridWeek",
+            start: "title",
+            end: "prev,next",
           }}
-          locale="ja" // 日本語化
+          locale="ja"
           selectable={true}
           selectMirror={true}
           selectOverlap={false}
@@ -82,19 +68,27 @@ export const ReservedMansionRoom = (): JSX.Element => {
           events={events}
           eventClick={(clickInfo) => {
             const eventDate = clickInfo.event.start;
-            const stay_date = eventDate?.toISOString().split("T")[0];
+            const year = eventDate?.getFullYear();
+            const month = (eventDate?.getMonth()! + 1).toString().padStart(2, '0');
+            const day = eventDate?.getDate().toString().padStart(2, '0');
+            const stay_date = `${year}-${month}-${day}`;
+            if (!stay_date) return;
             setValue("stay_date", stay_date);
-            // setSelectedDate(eventDate)
           }}
         />
-
+        <PlainInput
+          label="宿泊日"
+          disabled={true}
+          inputType="text"
+          defaultValue={watchValues ?? '選択されていません'}
+        />
         <div className="flex ">
           <PlainInput
             label="苗字"
             register={register}
             registerValue="last_name"
             inputType="text"
-            placeholder="鈴木"
+            placeholder="苗字を入力"
             error={errors.last_name?.message as string}
           />
           <PlainInput
@@ -102,7 +96,7 @@ export const ReservedMansionRoom = (): JSX.Element => {
             register={register}
             registerValue="first_name"
             inputType="text"
-            placeholder="太郎"
+            placeholder="名前を入力"
             error={errors.first_name?.message as string}
           />
         </div>
@@ -111,7 +105,7 @@ export const ReservedMansionRoom = (): JSX.Element => {
           register={register}
           registerValue="phone_number"
           inputType="tel"
-          placeholder="「-」無しの数字でお願いします。"
+          placeholder="「-」無しの数字"
           error={errors.phone_number?.message as string}
         />
         <PlainInput

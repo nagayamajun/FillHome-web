@@ -1,5 +1,5 @@
 import { UserLayout } from "@/components/layouts/Layout/UserLayout";
-import { ReservedMansionRoom } from "@/feature/reserve/page/ReservedRoom";
+import { ReservedMansionRoom } from "@/feature/reserve/components/create/page";
 import { ReactElement } from "react";
 
 const ReservedMansionRoomPage = () => <ReservedMansionRoom />;

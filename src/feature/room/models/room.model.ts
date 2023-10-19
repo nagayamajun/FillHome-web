@@ -57,5 +57,10 @@ export const roomFactory = (req?: RoomRepository) => {
       const response = await repository.create({ input, mansion_id });
       return response;
     },
+
+    getOne:async (mansion_room_id: string) => {
+      const response = await repository.getOne(mansion_room_id);
+      return response;
+    }
   };
 };

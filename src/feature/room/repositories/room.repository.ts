@@ -27,6 +27,7 @@ export type RoomRepository = {
   getAllWithRentalHouse: (
     houseId: string
   ) => Promise<MansionRoomsWithRentalHouse>;
+  getOne: (mansion_room_id: string) => Promise<MansionRoomModel['available_dates']>
 };
 
 const getOneWithRentalHouse: RoomRepository["getOneWithRentalHouse"] = async ({
@@ -126,6 +127,11 @@ const getAllWithRentalHouse: RoomRepository["getAllWithRentalHouse"] = async (
   };
 };
 
+const getOne: RoomRepository['getOne'] = async(mansion_room_id) => {
+  const response = await axiosInstance.get(`/mansion-room/${mansion_room_id}`);
+  return response.data.available_dates
+}
+
 const create: RoomRepository["create"] = async ({
   input,
   mansion_id,
@@ -144,4 +150,5 @@ export const roomRepository: RoomRepository = {
   getOneWithRentalHouse,
   create,
   getAllWithRentalHouse,
+  getOne
 };

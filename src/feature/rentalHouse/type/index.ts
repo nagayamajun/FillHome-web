@@ -13,7 +13,7 @@ export const RentalHouseSchema = z.object({
     .min(1, REQUIRE_FIELD)
     .max(100, REQUIRE_FIELD),
   building_age: z.coerce.number().min(1, REQUIRE_FIELD),
-  structure_type_id: z.coerce.number().min(1).max(3, REQUIRE_FIELD),
+  structure_type: z.coerce.number().min(1).max(3, REQUIRE_FIELD),
   rental_house_photos: z
     .custom<FileList>()
     .refine((fileList) => fileList.length >= 1, {

@@ -17,7 +17,7 @@ export const ADDRESS = "address";
 export const NEAREST_STATION = "nearest_station";
 export const MAX_FLOOR_NUMBER = "max_floor_number";
 export const BUILDING_AGE = "building_age";
-export const STRUCTURE_TYPE = "structure_type_id";
+export const STRUCTURE_TYPE = "structure_type";
 export const RENTAL_HOUSE_PHOTOS = "rental_house_photos";
 
 // 部屋(Room)

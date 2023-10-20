@@ -5,7 +5,7 @@ import { Photo } from "@/type/photo";
 import { RentalHouseModel } from "../models/rentalHouse.model";
 
 export type RentalHouseRequest = {
-  create: (input: CreateRentalHouse) => Promise<RentalHouseModel>;
+  create: (input: CreateRentalHouse) => Promise<{id: string}>;
   getAllOwn: () => Promise<RentalHouseModel[]>;
   getAll: () => Promise<RentalHouseModel[]>;
 };
@@ -19,20 +19,7 @@ const create: RentalHouseRequest["create"] = async (
     })
   ).data;
 
-  const result: RentalHouseModel = {
-    id: response.id,
-    name: response.name,
-    address: response.address,
-    nearest_station: response.nearest_station,
-    max_floor_number: response.max_floor_number,
-    building_age: response.building_age,
-    rental_house_photos: response.rental_house_photos.map(
-      (photo: Photo) => photo.image
-    ),
-    structure_type: Structure[response.structure_type_id],
-  };
-
-  return result;
+  return response;
 };
 
 const getAllOwn: RentalHouseRequest["getAllOwn"] = async () => {
@@ -48,7 +35,7 @@ const getAllOwn: RentalHouseRequest["getAllOwn"] = async () => {
       rental_house_photos: response.rental_house_photos.map(
         (photo: Photo) => photo.image
       ),
-      structure_type: Structure[response.structure_type_id],
+      structure_type: Structure[response.structure_type],
     };
   });
   return results;

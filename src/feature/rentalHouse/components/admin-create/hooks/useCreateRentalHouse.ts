@@ -21,14 +21,13 @@ export const useCreateRentalHouse = () => {
         files: data.rental_house_photos,
         destinationPath: "rentalHousePhotos",
       });
-
       const response = await rentalHouseFactory().create({
         name: data.name,
         address: data.address,
         nearest_station: data.nearest_station,
         max_floor_number: data.max_floor_number,
         building_age: data.building_age,
-        structure_type_id: data.structure_type_id,
+        structure_type: data.structure_type,
         rental_house_photos: urls,
       });
 

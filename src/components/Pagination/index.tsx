@@ -1,4 +1,4 @@
-import { SHOW_PAGE_NATION_COUNT } from "@/constants/const";
+import { PAGE_RANGE, SHOW_PAGE_NATION_COUNT } from "@/constants/const";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction } from "react";
 
@@ -10,10 +10,9 @@ type Props = {
 }
 
 export const PagiNation = ({ pageCount, currentPage, handleClicKPageRouter }: Props) => {
-  const router = useRouter();
 
-  let startPage = currentPage - 2;
-  let endPage = currentPage + 2;
+  let startPage = currentPage - PAGE_RANGE;
+  let endPage = currentPage + PAGE_RANGE;
   // 表示に関するロジック
   if (startPage < 1) {
     startPage = 1;

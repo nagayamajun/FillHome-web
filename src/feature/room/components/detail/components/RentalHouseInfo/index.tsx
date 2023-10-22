@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { RentalHouseModel } from "@/feature/rentalHouse/models/rentalHouse.model";
 import {
   ADDRESS_LABEL,
@@ -7,6 +6,8 @@ import {
   NEAREST_STATION_LABEL,
   STRUCTURE_TYPE_LABEL,
 } from "@/constants/const";
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
 
 type Props = {
   rentalHouse: RentalHouseModel;
@@ -24,14 +25,16 @@ export const RentalHouseInfo = ({
   },
 }: Props): JSX.Element => (
   <div className="flex flex-col space-y-8 w-full items-center">
-    <div className="w-full h-80 relative">
-      <Image
-        src={rental_house_photos[0]}
-        objectFit="cover"
-        layout="fill"
-        alt="賃貸の写真"
-      />
+    <div className="w-full">
+      <Splide aria-label="お気に入りの写真">
+        {rental_house_photos.map((img, index) => (
+          <SplideSlide key={index} >
+            <img src={img} alt="賃貸の写真"  className="w-full h-80" style={{ objectFit: 'cover' }}/>
+          </SplideSlide>
+        ))}
+      </Splide>
     </div>
+
     <div className="mx-6 w-4/5 md:w-2/3">
       <div>
         <h3 className="font-semibold text-xl">{name}</h3>

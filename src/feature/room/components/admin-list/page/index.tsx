@@ -17,7 +17,7 @@ export const RoomListBelongToOwnerHose = () => {
     <div className="flex flex-col items-center w-full min-h-screen h-full space-y-10 mb-8">
       <AdminRentalHouseInfo
         id={rentalHouse?.id}
-        rental_house_photos={rentalHouse?.rental_house_photos[0]}
+        rental_house_photos={rentalHouse?.rental_house_photos}
         name={rentalHouse?.name}
         address={rentalHouse?.address}
         nearest_station={rentalHouse?.nearest_station}

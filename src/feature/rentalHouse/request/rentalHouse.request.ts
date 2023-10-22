@@ -5,7 +5,7 @@ import { Photo } from "@/type/photo";
 import { RentalHouseModel } from "../models/rentalHouse.model";
 import { RentalHousesWithCount } from "../components/list/type";
 
-export type RentalHouseRequest = {
+export interface RentalHouseRequest {
   create: (input: CreateRentalHouse) => Promise<{id: string}>;
   getAllOwn: () => Promise<RentalHouseModel[]>;
   getAll: () => Promise<RentalHouseModel[]>;

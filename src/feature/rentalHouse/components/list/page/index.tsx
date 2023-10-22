@@ -23,16 +23,28 @@ export const SearchableRentalHouseList = ({
     const { search } = router.query;
 
     setCurrentPage(count);
-    // リファクタ: if文可読性よくない?
-    if (search && count) {
-      router.push(Routing.rentalHousesBySearchAndCurrentPage.buildRoute({ currentPage: count, search: search as string }).path);
-    } else if (count) {
-      router.push(Routing.rentalHousesByCurrentPage.buildRoute({ currentPage: count }).path);
-    } else if (search) {
-      router.push(Routing.rentalHousesBySearch.buildRoute({ search: search as string }).path);
-      setCurrentPage(1);
-    } else {
-      router.push(Routing.rentalHouses.buildRoute().path);
+    switch (true) {
+      case !!search && !!count:
+        router.push(
+          Routing.rentalHousesBySearchAndCurrentPage.buildRoute({
+            currentPage: count,
+            search: search as string,
+          }).path
+        );
+        break;
+      case !!count:
+        router.push(
+          Routing.rentalHousesByCurrentPage.buildRoute({ currentPage: count }).path
+        );
+        break;
+      case !!search:
+        router.push(
+          Routing.rentalHousesBySearch.buildRoute({ search: search as string }).path
+        );
+        setCurrentPage(1);
+        break;
+      default:
+        router.push(Routing.rentalHouses.buildRoute().path);
     }
   };
 

@@ -9,7 +9,7 @@ type Props = {
   handleClicKPageRouter: (count: number) => any
 }
 
-export const PagiNation = ({ pageCount, currentPage, setCurrentPage, handleClicKPageRouter }: Props) => {
+export const PagiNation = ({ pageCount, currentPage, handleClicKPageRouter }: Props) => {
   const router = useRouter();
 
   let startPage = currentPage - 2;
@@ -26,7 +26,7 @@ export const PagiNation = ({ pageCount, currentPage, setCurrentPage, handleClicK
   }
 
   // pagination生成
-  let liArray = [];
+  const liArray = [];
   for(let i = startPage; i < endPage + 1; i++) {
     const li = (
       <li

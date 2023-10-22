@@ -4,6 +4,8 @@
 export const ISR_REVALIDATE = 10; //発表用
 
 // 物件(RentalHouse)
+export const MAX_RENTAL_HOUSES_PER_REQUEST = 2;
+export const SHOW_PAGE_NATION_COUNT = 5; //paginationで表示する個数
 export const MANSION_LABEL = "マンション名";
 export const ADDRESS_LABEL = "住所";
 export const NEAREST_STATION_LABEL = "最寄駅";

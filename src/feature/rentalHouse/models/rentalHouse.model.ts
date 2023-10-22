@@ -1,7 +1,7 @@
 import { Mansion } from "@/feature/room/type/room";
 import { StructureType } from "../type/rentalHouse";
 import { CreateRentalHouse } from "../components/admin-create/type";
-import { RentalHouseRequest, rentalHouseRequest } from "../request/rentalHouse.request";
+import { RentalHouseRequest, SearchParams, rentalHouseRequest } from "../request/rentalHouse.request";
 
 // model
 export type RentalHouseModel = {
@@ -33,5 +33,9 @@ export const rentalHouseFactory = (req?: RentalHouseRequest) => {
       const response = await request.getAll();
       return response;
     },
+    getSearch:async (params: SearchParams) => {
+      const response = await request.getSearch(params);
+      return response
+    }
   };
 };

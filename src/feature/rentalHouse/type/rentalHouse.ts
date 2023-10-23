@@ -1,4 +1,3 @@
-// 型
 export type StructureType = "木造" | "S造・鉄骨造" | "RC造・鉄筋コンクリート造";
 
 interface StructureObject {

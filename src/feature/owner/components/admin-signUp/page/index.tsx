@@ -11,7 +11,6 @@ export const OwnerSignUp = (): JSX.Element => {
 
   const onSubmit = async(signUpData: SignUpInputType) => {
     const owner = await handleSignUp(signUpData);
-    console.log("返り値確認", owner)
     if (owner?.token) router.push(Routing.adminRentalHouses.buildRoute().path)
   }
   return (

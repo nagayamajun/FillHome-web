@@ -23,7 +23,9 @@ export type RoutingType = {
   }>;
   //rentalHouse
   rentalHouses: RoutingWithNoParams;
-  rentalHousesByHouseName: RoutingWithParams<{ houseName: string }>;
+  rentalHousesBySearch: RoutingWithParams<{ search: string }>;
+  rentalHousesByCurrentPage: RoutingWithParams<{ currentPage: number }>;
+  rentalHousesBySearchAndCurrentPage: RoutingWithParams<{ search: string, currentPage: number }>;
 
   //admin
   //owner

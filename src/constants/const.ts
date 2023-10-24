@@ -1,7 +1,8 @@
-// 定数
-// 共通
-// export const ISR_REVALIDATE = 43200; // 12時間
-export const ISR_REVALIDATE = 10; //発表用
+
+// Pagination
+export const MAX_RENTAL_HOUSES_PER_REQUEST = 10;
+export const SHOW_PAGE_NATION_COUNT = 5; 
+export const PAGE_RANGE = 2;
 
 // 物件(RentalHouse)
 export const MANSION_LABEL = "マンション名";

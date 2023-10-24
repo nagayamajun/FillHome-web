@@ -16,7 +16,6 @@ export const ownerFactory = (req?: OwnerRequest) => {
   return {
     getByFirebaseUID: async () => {
       const response = await request.getByFirebaseUID();
-      console.log("確認",response)
       return response
     }
   }

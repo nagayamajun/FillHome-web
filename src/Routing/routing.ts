@@ -42,14 +42,34 @@ export const Routing: RoutingType = {
     },
     pathName: "rentalHouseの一覧",
   },
-  rentalHousesByHouseName: {
-    buildRoute: ({ houseName }) => {
+  rentalHousesBySearch: {
+    buildRoute: ({ search }) => {
       return {
-        id: "rentalHousesByHouseName",
-        path: `${rentalHousePath}?houseName=${houseName}`,
+        id: "rentalHousesBySearch",
+        path: `${rentalHousePath}?search=${search}`,
       };
     },
-    pathName: "rentalHouseをhotelNameで条件検索",
+    pathName: "rentalHouseを条件検索",
+  },
+
+  rentalHousesByCurrentPage: {
+    buildRoute: ({ currentPage }) => {
+      return {
+        id: "rentalHousesByCurrentPage",
+        path: `${rentalHousePath}?currentPage=${currentPage}`,
+      };
+    },
+    pathName: "現在のページを取得",
+  },
+
+  rentalHousesBySearchAndCurrentPage: {
+    buildRoute: ({ search, currentPage }) => {
+      return {
+        id: "rentalHousesBySearchAndCurrentPage",
+        path: `${rentalHousePath}?search=${search}&currentPage=${currentPage}`,
+      };
+    },
+    pathName: "rentalHouseを条件検索と現在のページ",
   },
 
   ownerSignUp: {

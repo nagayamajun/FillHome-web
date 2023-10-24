@@ -26,7 +26,6 @@ export const RentalHouseCard = ({
 
   return (
     <section className="flex flex-col self-start w-full sm:w-[400px] sm:p-4 xl:p-8 items-center space-y-4 rounded-lg">
-      {/* <figure style={{ position: "relative", width: "400px", height: "320px" }}> */}
       <figure className="relative w-full sm:w-[400px] h-80">
         <Image
           className="rounded-lg"
@@ -36,7 +35,7 @@ export const RentalHouseCard = ({
           objectFit="cover"
         />
       </figure>
-      
+
       <div className="flex flex-col w-full sm:w-[400px] items-start text-left text-sm">
         <p className="text-base font-semibold">{houseName}</p>
         <p className="text-gray-500 mb-1">{address}</p>

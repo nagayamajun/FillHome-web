@@ -11,17 +11,15 @@ type Props = {
 
 export const PagiNation = ({ pageCount, currentPage, handleClicKPageRouter }: Props) => {
 
-  let startPage = currentPage - PAGE_RANGE;
-  let endPage = currentPage + PAGE_RANGE;
-  // 表示に関するロジック
-  if (startPage < 1) {
-    startPage = 1;
-    endPage = Math.min(SHOW_PAGE_NATION_COUNT, pageCount)
-  }
+  let startPage = Math.max(1, currentPage - PAGE_RANGE);
+  let endPage = Math.min(pageCount, currentPage + PAGE_RANGE);
 
-  if (endPage > pageCount) {
-    endPage = pageCount;
-    startPage = pageCount - (SHOW_PAGE_NATION_COUNT - 1);
+  if (endPage - startPage + 1 < SHOW_PAGE_NATION_COUNT) {
+    if (startPage === 1) {
+      endPage = Math.min(pageCount, SHOW_PAGE_NATION_COUNT);
+    } else {
+      startPage = Math.max(1, endPage - SHOW_PAGE_NATION_COUNT + 1);
+    }
   }
 
   // pagination生成

@@ -16,7 +16,8 @@ export const SearchableRentalHouseList = ({
   totalCount
 }: Props): JSX.Element => {
   const router = useRouter();
-  const { currentPage, setCurrentPage, pageCount } = usePagination(totalCount);
+  const { currentPage: queryCurrentPage } = router.query;
+  const { currentPage, setCurrentPage, pageCount } = usePagination(totalCount, Number(queryCurrentPage) ?? 1);
 
   // Paginationのロジック(routingの為カスタムフックに切り出せていない)
   const handleClicKPageRouter = (count: number) => {

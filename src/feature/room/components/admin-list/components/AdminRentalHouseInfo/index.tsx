@@ -1,9 +1,9 @@
 import Image from "next/image";
 import {
-  Structure,
   StructureType,
 } from "../../../../../rentalHouse/type/rentalHouse";
-import { Layout } from "@/feature/room/type/room";
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
 
 type Props = {
   id: string;
@@ -12,7 +12,7 @@ type Props = {
   nearest_station: string;
   max_floor_number: number;
   building_age: number;
-  rental_house_photos: string;
+  rental_house_photos: string[];
   structure_type: StructureType;
 };
 
@@ -27,7 +27,7 @@ export const AdminRentalHouseInfo = ({
   rental_house_photos,
 }: Props) => (
   <>
-    <div className="w-sm md:w-md lg:w-lg h-[320px] lg:h-[400px] relative">
+    {/* <div className="w-sm md:w-md lg:w-lg h-[320px] lg:h-[400px] relative">
       <Image
         className="rounded-2xl"
         src={rental_house_photos}
@@ -35,6 +35,15 @@ export const AdminRentalHouseInfo = ({
         objectFit="cover"
         layout="fill"
       />
+    </div> */}
+        <div className="w-full">
+      <Splide aria-label="お気に入りの写真">
+        {rental_house_photos.map((img, index) => (
+          <SplideSlide key={index} >
+            <img src={img} alt="賃貸の写真"  className="w-full h-96 rounded-md" style={{ objectFit: 'cover' }}/>
+          </SplideSlide>
+        ))}
+      </Splide>
     </div>
     <div className="w-sm md:w-md lg:w-lg ">
       <h3 className="font-semibold text-xl">{name}</h3>

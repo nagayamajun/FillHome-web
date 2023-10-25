@@ -1,4 +1,4 @@
-import { PAGE_RANGE, SHOW_PAGE_NATION_COUNT } from "@/constants/const";
+import { PAGE_RANGE, SHOW_PAGINATION_COUNT } from "@/constants/const";
 import { useRouter } from "next/router";
 import { Dispatch, SetStateAction } from "react";
 
@@ -14,11 +14,11 @@ export const PagiNation = ({ pageCount, currentPage, handleClicKPageRouter }: Pr
   let startPage = Math.max(1, currentPage - PAGE_RANGE);
   let endPage = Math.min(pageCount, currentPage + PAGE_RANGE);
 
-  if (endPage - startPage + 1 < SHOW_PAGE_NATION_COUNT) {
+  if (endPage - startPage + 1 < SHOW_PAGINATION_COUNT) {
     if (startPage === 1) {
-      endPage = Math.min(pageCount, SHOW_PAGE_NATION_COUNT);
+      endPage = Math.min(pageCount, SHOW_PAGINATION_COUNT);
     } else {
-      startPage = Math.max(1, endPage - SHOW_PAGE_NATION_COUNT + 1);
+      startPage = Math.max(1, endPage - SHOW_PAGINATION_COUNT + 1);
     }
   }
 

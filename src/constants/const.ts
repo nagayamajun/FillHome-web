@@ -1,7 +1,7 @@
 
 // Pagination
 export const MAX_RENTAL_HOUSES_PER_REQUEST = 10;
-export const SHOW_PAGE_NATION_COUNT = 5; 
+export const SHOW_PAGINATION_COUNT = 5; 
 export const PAGE_RANGE = 2;
 
 // 物件(RentalHouse)

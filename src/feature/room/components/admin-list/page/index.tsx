@@ -37,7 +37,6 @@ export const RoomListBelongToOwnerHose = () => {
         </div>
 
         <AdminRoomListBelongToRentalHose mansionRooms={rooms} />
-      </div>
       
       <EditRentalHouseModal
         isOpen={isEditModalOpen}
@@ -45,6 +44,7 @@ export const RoomListBelongToOwnerHose = () => {
         rentalHouse={rentalHouse}
         handleEdit={handleEdit}
       />
+      </div>
     </>
   );
 };

@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { RentalHouseModel } from "@/feature/rentalHouse/models/rentalHouse.model";
 import { AiFillEdit } from "react-icons/ai"
-import { PlainButton } from "@/components/Button";
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+import '@splidejs/react-splide/css';
 
 type Props = {
   rentalHouse: RentalHouseModel,
@@ -13,14 +13,14 @@ export const AdminRentalHouseInfo = ({
  openEditRentalHouseModal
 }: Props) => (
   <>
-    <div className="w-sm md:w-md lg:w-lg h-[320px] lg:h-[400px] relative">
-      <Image
-        className="rounded-2xl"
-        src={rental_house_photos[0]}
-        alt="家の写真です。"
-        objectFit="cover"
-        layout="fill"
-      />
+    <div className="w-full">
+      <Splide aria-label="お気に入りの写真">
+        {rental_house_photos.map((img, index) => (
+          <SplideSlide key={index} >
+            <img src={img} alt="賃貸の写真"  className="w-full h-96 rounded-md" style={{ objectFit: 'cover' }}/>
+          </SplideSlide>
+        ))}
+      </Splide>
     </div>
     <div className="w-sm md:w-md lg:w-lg flex flex-col items-end">
       <button onClick={openEditRentalHouseModal}><AiFillEdit className={"h-8 w-8 bg-gray-200 p-2 rounded-full"} /></button>

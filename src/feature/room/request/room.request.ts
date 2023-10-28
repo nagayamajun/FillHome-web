@@ -9,7 +9,7 @@ import { Photo } from "@/type/photo";
 import { RentalHouseModel } from "@/feature/rentalHouse/models/rentalHouse.model";
 import { Structure } from "@/feature/rentalHouse/type/rentalHouse";
 
-export type RoomRepository = {
+export type RoomRequest = {
   getOneWithRentalHouse: ({
     id,
     rental_house_id,
@@ -30,7 +30,7 @@ export type RoomRepository = {
   getOne: (mansion_room_id: string) => Promise<MansionRoomModel['available_dates']>
 };
 
-const getOneWithRentalHouse: RoomRepository["getOneWithRentalHouse"] = async ({
+const getOneWithRentalHouse: RoomRequest["getOneWithRentalHouse"] = async ({
   id,
   rental_house_id,
 }: {
@@ -79,7 +79,7 @@ const getOneWithRentalHouse: RoomRepository["getOneWithRentalHouse"] = async ({
   };
 };
 
-const getAllWithRentalHouse: RoomRepository["getAllWithRentalHouse"] = async (
+const getAllWithRentalHouse: RoomRequest["getAllWithRentalHouse"] = async (
   house_id: string
 ) => {
   const response = (
@@ -127,12 +127,12 @@ const getAllWithRentalHouse: RoomRepository["getAllWithRentalHouse"] = async (
   };
 };
 
-const getOne: RoomRepository['getOne'] = async(mansion_room_id) => {
+const getOne: RoomRequest['getOne'] = async(mansion_room_id) => {
   const response = await axiosInstance.get(`/mansion-room/${mansion_room_id}`);
   return response.data.available_dates
 }
 
-const create: RoomRepository["create"] = async ({
+const create: RoomRequest["create"] = async ({
   input,
   mansion_id,
 }: {
@@ -146,7 +146,7 @@ const create: RoomRepository["create"] = async ({
   return response.data.id;
 };
 
-export const roomRepository: RoomRepository = {
+export const roomRequest: RoomRequest = {
   getOneWithRentalHouse,
   create,
   getAllWithRentalHouse,

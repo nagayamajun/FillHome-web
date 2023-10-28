@@ -1,42 +1,21 @@
-import Image from "next/image";
-import {
-  StructureType,
-} from "../../../../../rentalHouse/type/rentalHouse";
+import { RentalHouseModel } from "@/feature/rentalHouse/models/rentalHouse.model";
+import { AiFillEdit, AiFillDelete } from "react-icons/ai"
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 
 type Props = {
-  id: string;
-  name: string;
-  address: string;
-  nearest_station: string;
-  max_floor_number: number;
-  building_age: number;
-  rental_house_photos: string[];
-  structure_type: StructureType;
+  rentalHouse: RentalHouseModel,
+  openEditRentalHouseModal: () => void,
+  handleDelete: () => Promise<void>
 };
 
 export const AdminRentalHouseInfo = ({
-  id,
-  name,
-  address,
-  nearest_station,
-  structure_type,
-  max_floor_number,
-  building_age,
-  rental_house_photos,
+ rentalHouse: { rental_house_photos, name, address, nearest_station, structure_type, max_floor_number, building_age },
+ openEditRentalHouseModal,
+ handleDelete
 }: Props) => (
   <>
-    {/* <div className="w-sm md:w-md lg:w-lg h-[320px] lg:h-[400px] relative">
-      <Image
-        className="rounded-2xl"
-        src={rental_house_photos}
-        alt="家の写真です。"
-        objectFit="cover"
-        layout="fill"
-      />
-    </div> */}
-        <div className="w-full">
+    <div className="w-full">
       <Splide aria-label="お気に入りの写真">
         {rental_house_photos.map((img, index) => (
           <SplideSlide key={index} >
@@ -45,29 +24,35 @@ export const AdminRentalHouseInfo = ({
         ))}
       </Splide>
     </div>
-    <div className="w-sm md:w-md lg:w-lg ">
-      <h3 className="font-semibold text-xl">{name}</h3>
-      <div className="flex-col space-y-2 bg-gray-100 rounded-lg px-4 py-5 my-6">
-        <div>
-          <p className="text-xs">住所</p>
-          <p>&nbsp;{address}</p>
-        </div>
-        <div>
-          <p className="text-xs">最寄駅</p>
-          <p>&nbsp;{nearest_station}</p>
-        </div>
-        <div className="flex justify-between">
-          <div className="w-1/3">
-            <p className="text-xs">構造</p>
-            <p>{structure_type}</p>
+    <div className="w-sm md:w-md lg:w-lg flex flex-col items-end">
+      <div className="space-x-2">
+        <button onClick={handleDelete}><AiFillDelete className={"h-8 w-8 bg-gray-200 p-2 rounded-full"} /></button>
+        <button onClick={openEditRentalHouseModal}><AiFillEdit className={"h-8 w-8 bg-gray-200 p-2 rounded-full"} /></button>
+      </div>
+      <div className="w-full">
+        <h3 className="font-semibold text-xl">{name}</h3>
+        <div className="flex-col space-y-2 bg-gray-100 rounded-lg px-4 py-5 my-6">
+          <div>
+            <p className="text-xs">住所</p>
+            <p>&nbsp;{address}</p>
           </div>
-          <div className="w-1/3">
-            <p className="text-xs">階数</p>
-            <p>&nbsp;{max_floor_number}建</p>
+          <div>
+            <p className="text-xs">最寄駅</p>
+            <p>&nbsp;{nearest_station}</p>
           </div>
-          <div className="w-1/3">
-            <p className="text-xs">築年数</p>
-            <p>&nbsp;{building_age}年</p>
+          <div className="flex justify-between">
+            <div className="w-1/3">
+              <p className="text-xs">構造</p>
+              <p>{structure_type}</p>
+            </div>
+            <div className="w-1/3">
+              <p className="text-xs">階数</p>
+              <p>&nbsp;{max_floor_number}建</p>
+            </div>
+            <div className="w-1/3">
+              <p className="text-xs">築年数</p>
+              <p>&nbsp;{building_age}年</p>
+            </div>
           </div>
         </div>
       </div>

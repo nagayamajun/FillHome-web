@@ -12,7 +12,7 @@ type Props = {
   registerValue?: string;
   register?: UseFormRegister<any>;
   error?: string;
-  defaultValue?: string;
+  defaultValue?: string | number;
   onBlur?: FocusEventHandler<HTMLInputElement> | undefined;
   disabled?: boolean;
   labelClassName?: string;

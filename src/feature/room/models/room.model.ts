@@ -1,7 +1,4 @@
-import {
-  RoomRepository,
-  roomRepository,
-} from "../repositories/room.repository";
+import { RoomRequest, roomRequest } from "../request/room.request";
 import { CreateRoom, Layout } from "../type/room";
 
 // model
@@ -24,8 +21,8 @@ export type BaseRoomModel = {
 export type MansionRoomModel = BaseRoomModel;
 
 // Factory
-export const roomFactory = (req?: RoomRepository) => {
-  const repository = req ?? roomRepository;
+export const roomFactory = (req?: RoomRequest) => {
+  const repository = req ?? roomRequest;
 
   return {
     getOneWithHouse: async ({

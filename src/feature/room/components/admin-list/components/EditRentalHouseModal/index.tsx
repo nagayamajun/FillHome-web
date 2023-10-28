@@ -21,14 +21,13 @@ export const EditRentalHouseModal: React.FC<Props> = ({
   isOpen,
   closeModal,
   rentalHouse,
-  handleEdit
+  handleEdit,
 }): JSX.Element => {
   const { handleSubmit, register, formState: { errors }, watch } = useForm<EditRentalSchemaType>({
     resolver: zodResolver(EditRentalHouseSchema),
   });
 
   const onclick = async (data: EditRentalSchemaType) => await handleEdit({rentalHouseId: rentalHouse.id, input: data})
-
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>

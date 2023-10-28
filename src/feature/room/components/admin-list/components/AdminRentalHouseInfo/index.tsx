@@ -1,16 +1,18 @@
 import { RentalHouseModel } from "@/feature/rentalHouse/models/rentalHouse.model";
-import { AiFillEdit } from "react-icons/ai"
+import { AiFillEdit, AiFillDelete } from "react-icons/ai"
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css';
 
 type Props = {
   rentalHouse: RentalHouseModel,
-  openEditRentalHouseModal: () => void
+  openEditRentalHouseModal: () => void,
+  handleDelete: () => Promise<void>
 };
 
 export const AdminRentalHouseInfo = ({
  rentalHouse: { rental_house_photos, name, address, nearest_station, structure_type, max_floor_number, building_age },
- openEditRentalHouseModal
+ openEditRentalHouseModal,
+ handleDelete
 }: Props) => (
   <>
     <div className="w-full">
@@ -23,7 +25,10 @@ export const AdminRentalHouseInfo = ({
       </Splide>
     </div>
     <div className="w-sm md:w-md lg:w-lg flex flex-col items-end">
-      <button onClick={openEditRentalHouseModal}><AiFillEdit className={"h-8 w-8 bg-gray-200 p-2 rounded-full"} /></button>
+      <div className="space-x-2">
+        <button onClick={handleDelete}><AiFillDelete className={"h-8 w-8 bg-gray-200 p-2 rounded-full"} /></button>
+        <button onClick={openEditRentalHouseModal}><AiFillEdit className={"h-8 w-8 bg-gray-200 p-2 rounded-full"} /></button>
+      </div>
       <div className="w-full">
         <h3 className="font-semibold text-xl">{name}</h3>
         <div className="flex-col space-y-2 bg-gray-100 rounded-lg px-4 py-5 my-6">

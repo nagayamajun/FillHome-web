@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useSpecificRentalHouseAndBelongingToRooms } from "../hooks/useSpecificRentalHouseAndBelongingToRooms";
 import { EditRentalHouseModal } from "../components/EditRentalHouseModal";
 import { useEditRentalHouse } from "../hooks/useEditRentalHouse";
+import { useDeleteRentalHouse } from "../hooks/useDeleteRentalHouse";
 
 export const RoomListBelongToOwnerHose = () => {
   const router = useRouter();
@@ -14,8 +15,15 @@ export const RoomListBelongToOwnerHose = () => {
   const { rooms, rentalHouse } = useSpecificRentalHouseAndBelongingToRooms(
     houseId as string
   );
+
+  const { handleDelete } = useDeleteRentalHouse();
   const { handleEdit, isEditModalOpen, openEditRentalHouseModal, closeEditRentalHouseModal } = useEditRentalHouse();
 
+  const deleteRentalHouse = async () => {
+    if (!rentalHouse?.id) return
+    const isSuccess = await handleDelete(rentalHouse?.id as string);
+    if (isSuccess) router.push(Routing.adminRentalHouses.buildRoute().path);
+  }
   if (!rentalHouse) return <></>;
   return (
     <>
@@ -23,6 +31,7 @@ export const RoomListBelongToOwnerHose = () => {
         <AdminRentalHouseInfo
           rentalHouse={rentalHouse}
           openEditRentalHouseModal={openEditRentalHouseModal}
+          handleDelete={deleteRentalHouse}
         />
 
         <div className="sm: w-1/2 md:w-1/3 lg:w-1/4 ">

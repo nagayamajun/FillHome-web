@@ -20,7 +20,7 @@ export const RentalHouseCard = ({
 }: Props): JSX.Element => {
   //1番安い家賃を取得する。
   const minRent = useMemo(
-    () => rooms && Math.min(...rooms.map((room) => room.rent)),
+    () => rooms && rooms?.length > 1 && Math.min(...rooms.map((room) => room.rent)),
     [rooms]
   );
 

@@ -10,6 +10,7 @@ export interface RentalHouseRequest {
   getAllOwn: () => Promise<RentalHouseModel[]>;
   getAll: () => Promise<RentalHouseModel[]>;
   getSearch: (params: SearchParams) => Promise<RentalHousesWithCount>;
+  edit: ({ id, input }: {id: string, input: CreateRentalHouse}) => Promise<{id: string}>
 };
 
 const create: RentalHouseRequest["create"] = async (
@@ -67,7 +68,7 @@ export type SearchParams = {
   search?: string,
   offset?: string,
   limit: number,
-}
+};
 
 const getSearch: RentalHouseRequest['getSearch'] = async(params: SearchParams) => {
   const response = (await axiosInstance.get(`/rental-house/search`,
@@ -88,17 +89,22 @@ const getSearch: RentalHouseRequest['getSearch'] = async(params: SearchParams) =
       mansion: response.mansion,
     };
   });
-  
 
   return {
     rentalHouses: results,
     totalCount: response.totalCount
   }
+};
+
+const edit: RentalHouseRequest['edit'] =async ({id, input}) => {
+  const response = (await axiosInstance.put(`test/${id}`, {...input})).data;
+  return response
 }
 
 export const rentalHouseRequest: RentalHouseRequest = {
   create,
   getAllOwn,
   getAll,
-  getSearch
+  getSearch,
+  edit
 };

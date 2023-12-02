@@ -9,7 +9,7 @@ import { Photo } from "@/type/photo";
 import { RentalHouseModel } from "@/feature/rentalHouse/models/rentalHouse.model";
 import { Structure } from "@/feature/rentalHouse/type/rentalHouse";
 
-export type RoomRequest = {
+export interface RoomRequest {
   getOneWithRentalHouse: ({
     id,
     rental_house_id,

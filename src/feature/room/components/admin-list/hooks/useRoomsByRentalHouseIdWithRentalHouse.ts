@@ -8,7 +8,7 @@ import { useNotice } from "@/hooks/useNotice";
 import { FAIL_TO_GET_ROOMS_WITH_RENTALHOUSE } from "@/constants/messages";
 import { RentalHouseModel } from "@/feature/rentalHouse/models/rentalHouse.model";
 
-export const useSpecificRentalHouseAndBelongingToRooms = (houseId?: string) => {
+export const useRoomsByRentalHouseIdWithRentalHouse = (houseId?: string) => {
   // custom-hook
   const { showLoading, hideLoading } = useLoading();
   const notice = useNotice();
@@ -22,7 +22,7 @@ export const useSpecificRentalHouseAndBelongingToRooms = (houseId?: string) => {
     (async () => {
       showLoading();
       try {
-        const response = await roomFactory().getAllWithRentalHouse(houseId);
+        const response = await roomFactory().getByRentalHouseId(houseId);
         setRooms(response.mansion_rooms);
         setRentalHouse(response.rental_house);
 

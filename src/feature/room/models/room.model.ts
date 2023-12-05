@@ -39,25 +39,25 @@ export const roomFactory = (req?: RoomRequest) => {
       return response;
     },
 
-    getAllWithRentalHouse: async (house_id: string) => {
-      const response = await repository.getAllWithRentalHouse(house_id);
+    getByRentalHouseId: async (rental_house_id: string) => {
+      const response = await repository.getByRentalHouseId(rental_house_id);
       return response;
     },
 
     create: async ({
       input,
-      mansion_id,
+      rental_house_id,
     }: {
       input: CreateRoom;
-      mansion_id: string;
+      rental_house_id: string;
     }) => {
-      const response = await repository.create({ input, mansion_id });
+      const response = await repository.create({ input, rental_house_id });
       return response;
     },
 
-    getOne:async (mansion_room_id: string) => {
+    getOne: async (mansion_room_id: string) => {
       const response = await repository.getOne(mansion_room_id);
       return response;
-    }
+    },
   };
 };

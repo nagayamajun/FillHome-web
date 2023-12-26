@@ -19,12 +19,12 @@ export const useCreateMansionRoom = () => {
   // 型変換を行う層を検討する。
   const handleCreate = async ({
     input,
-    mansion_id,
+    rental_house_id,
   }: {
     input: RoomSchemaType;
-    mansion_id?: string;
+    rental_house_id?: string;
   }) => {
-    if (!mansion_id) return;
+    if (!rental_house_id) return;
     showLoading();
     const { mansion_room_photos, available_dates, layout, ...rest } = input;
 
@@ -48,19 +48,19 @@ export const useCreateMansionRoom = () => {
     });
 
     try {
-      const id = await roomFactory().create({
+      await roomFactory().create({
         input: {
           ...rest,
           layout: type_change_layout,
           mansion_room_photos: urls,
           available_dates: type_change_available_dates,
         },
-        mansion_id,
+        rental_house_id,
       });
       hideLoading();
       notice.success(SUCCESS_TO_RENTALHOUSE);
 
-      return id;
+      return rental_house_id;
     } catch (error: unknown) {
       hideLoading();
       const isTypeSafeError = error instanceof Error;

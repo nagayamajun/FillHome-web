@@ -1,6 +1,7 @@
 import { OwnerRequest, ownerRequest } from "../requests/owner.request";
+import { SignUpType } from "../type/owner";
 
-// model 
+// model
 export type OwnerModel = {
   id?: string;
   firebase_uid?: string;
@@ -8,7 +9,7 @@ export type OwnerModel = {
   phone_number: string;
   last_name: string;
   first_name: string;
-}
+};
 
 export const ownerFactory = (req?: OwnerRequest) => {
   const request = req ?? ownerRequest;
@@ -16,7 +17,11 @@ export const ownerFactory = (req?: OwnerRequest) => {
   return {
     getByFirebaseUID: async () => {
       const response = await request.getByFirebaseUID();
-      return response
-    }
-  }
-}
+      return response;
+    },
+    create: async (input: SignUpType) => {
+      const response = await request.create(input);
+      return response;
+    },
+  };
+};

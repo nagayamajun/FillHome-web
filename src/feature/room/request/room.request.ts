@@ -19,28 +19,26 @@ export interface RoomRequest {
   }) => Promise<MansionRoomWithRentalHouse>;
   create: ({
     input,
-    mansion_id,
+    rental_house_id,
   }: {
     input: CreateRoom;
-    mansion_id: string;
+    rental_house_id: string;
   }) => Promise<Pick<MansionRoomModel, "id">>;
-  getAllWithRentalHouse: (
-    houseId: string
+  getByRentalHouseId: (
+    rental_house_id: string
   ) => Promise<MansionRoomsWithRentalHouse>;
-  getOne: (mansion_room_id: string) => Promise<MansionRoomModel['available_dates']>
-};
+  getOne: (
+    mansion_room_id: string
+  ) => Promise<MansionRoomModel["available_dates"]>;
+}
 
 const getOneWithRentalHouse: RoomRequest["getOneWithRentalHouse"] = async ({
   id,
-  rental_house_id,
 }: {
   id: string;
-  rental_house_id: string;
 }) => {
   const { mansion_room, rental_house } = (
-    await axiosInstance.get(
-      `/mansion-room/rental-house/${rental_house_id}/room/${id}`
-    )
+    await axiosInstance.get(`/mansion-rooms/${id}/rental-house`)
   ).data;
   const resRoom: MansionRoomModel = {
     id: mansion_room.id,
@@ -79,29 +77,14 @@ const getOneWithRentalHouse: RoomRequest["getOneWithRentalHouse"] = async ({
   };
 };
 
-const getAllWithRentalHouse: RoomRequest["getAllWithRentalHouse"] = async (
-  house_id: string
+const getByRentalHouseId: RoomRequest["getByRentalHouseId"] = async (
+  rental_house_id: string
 ) => {
   const response = (
-    await axiosInstance.get(
-      `/rental-house/owner/${house_id}/rental-house-to-rooms`
-    )
+    await axiosInstance.get(`mansion-rooms/rental-house/${rental_house_id}`)
   ).data;
 
-  const resRentalHouse: RentalHouseModel = {
-    id: response.id,
-    name: response.name,
-    address: response.address,
-    nearest_station: response.nearest_station,
-    max_floor_number: response.max_floor_number,
-    building_age: response.building_age,
-    rental_house_photos: response.rental_house_photos.map(
-      (photo: Photo) => photo.image
-    ),
-    structure_type: Structure[response.structure_type],
-  };
-
-  const resRooms: MansionRoomModel[] = response.mansion.mansion_rooms.map(
+  const resRooms: MansionRoomModel[] = (response.mansion_rooms ?? []).map(
     (room: any) => {
       return {
         id: room.id,
@@ -120,6 +103,18 @@ const getAllWithRentalHouse: RoomRequest["getAllWithRentalHouse"] = async (
       };
     }
   );
+  const resRentalHouse: RentalHouseModel = {
+    id: response.rental_house.id,
+    name: response.rental_house.name,
+    address: response.rental_house.address,
+    nearest_station: response.rental_house.nearest_station,
+    max_floor_number: response.rental_house.max_floor_number,
+    building_age: response.rental_house.building_age,
+    rental_house_photos: response.rental_house.rental_house_photos.map(
+      (photo: Photo) => photo.image
+    ),
+    structure_type: Structure[response.rental_house.structure_type],
+  };
 
   return {
     mansion_rooms: resRooms,
@@ -127,20 +122,22 @@ const getAllWithRentalHouse: RoomRequest["getAllWithRentalHouse"] = async (
   };
 };
 
-const getOne: RoomRequest['getOne'] = async(mansion_room_id) => {
-  const response = await axiosInstance.get(`/mansion-room/${mansion_room_id}`);
-  return response.data.available_dates
-}
+const getOne: RoomRequest["getOne"] = async (mansion_room_id) => {
+  const response = await axiosInstance.get(
+    `/mansion-rooms/${mansion_room_id}/photos`
+  );
+  return response.data.available_dates;
+};
 
 const create: RoomRequest["create"] = async ({
   input,
-  mansion_id,
+  rental_house_id,
 }: {
   input: CreateRoom;
-  mansion_id: string;
+  rental_house_id: string;
 }) => {
   const response = await axiosInstance.post(
-    `/mansion-room/create/${mansion_id}`,
+    `/mansion-rooms/${rental_house_id}`,
     input
   );
   return response.data.id;
@@ -149,6 +146,6 @@ const create: RoomRequest["create"] = async ({
 export const roomRequest: RoomRequest = {
   getOneWithRentalHouse,
   create,
-  getAllWithRentalHouse,
-  getOne
+  getByRentalHouseId,
+  getOne,
 };

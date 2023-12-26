@@ -45,12 +45,14 @@ export const CreateRoomForm = ({ houseId }: Props) => {
   const { handleCreate } = useCreateMansionRoom();
 
   const onSubmit = async (data: RoomSchemaType) => {
-    const isCreate = await handleCreate({ input: data, mansion_id: houseId });
-    if (isCreate?.id)
-      router.push(
-        Routing.adminRoomsBelongToHouse.buildRoute({ houseId: isCreate.id })
-          .path
-      );
+    await handleCreate({
+      input: data,
+      rental_house_id: houseId,
+    });
+
+    if (houseId) {
+      router.push(Routing.adminRoomsBelongToHouse.buildRoute({ houseId }).path);
+    }
   };
 
   return (

@@ -123,7 +123,9 @@ const getByRentalHouseId: RoomRequest["getByRentalHouseId"] = async (
 };
 
 const getOne: RoomRequest["getOne"] = async (mansion_room_id) => {
-  const response = await axiosInstance.get(`/mansion-room/${mansion_room_id}`);
+  const response = await axiosInstance.get(
+    `/mansion-rooms/${mansion_room_id}/photos`
+  );
   return response.data.available_dates;
 };
 

@@ -4,6 +4,7 @@ import { CreateRentalHouse } from "../components/admin-create/type";
 import { Photo } from "@/type/photo";
 import { RentalHouseModel } from "../models/rentalHouse.model";
 import { RentalHousesWithCount } from "../components/list/type";
+import { MansionRoomModel } from "@/feature/room/models/room.model";
 
 export interface RentalHouseRequest {
   create: (input: CreateRentalHouse) => Promise<{ id: string }>;
@@ -84,25 +85,30 @@ const getSearch: RentalHouseRequest["getSearch"] = async (
   const response = (
     await axiosInstance.get(`/rental-houses/search`, { params: params })
   ).data;
-  const results: RentalHouseModel[] = response.map((response: any) => {
-    return {
-      id: response.id,
-      name: response.name,
-      address: response.address,
-      nearest_station: response.nearest_station,
-      max_floor_number: response.max_floor_number,
-      building_age: response.building_age,
-      rental_house_photos: response.rental_house_photos.map(
-        (photo: Photo) => photo.image
-      ),
-      structure_type: Structure[response.structure_type],
-      mansion: response.mansion,
-    };
-  });
+
+  const rentalHouses: RentalHouseModel[] = (response.rental_houses ?? []).map(
+    (rentalHouse: any) => {
+      rentalHouse.mansion_rooms = rentalHouse.mansion_rooms.map((room: any) => {
+        return {
+          ...room,
+          mansion_room_photos: room.mansion_room_photos.map(
+            (photo: Photo) => photo.image
+          ),
+        };
+      });
+      return {
+        ...rentalHouse,
+        rental_house_photos: rentalHouse.rental_house_photos.map(
+          (photo: Photo) => photo.image
+        ),
+        structure_type: Structure[rentalHouse.structure_type],
+      };
+    }
+  );
 
   return {
-    rentalHouses: results,
-    totalCount: response.totalCount,
+    rentalHouses,
+    totalCount: response.total_count,
   };
 };
 
